@@ -27,16 +27,19 @@ export const users = [
 
 export const sections = [
   {
+    id: 1,
     name: 'Fridge',
     icon: 'fridge',
     style: 'material-community'
   },
   {
+    id: 2,
     name: 'Freezer',
     icon: 'snowflake',
     style: 'material-community'
   },
   {
+    id: 3,
     name: 'Pantry',
     icon: 'box',
     style: 'entypo'
@@ -49,26 +52,35 @@ export const items = [
     name: 'chicken',
     done: true,
     food_id: 6,
-    section: 'freezer',
+    section_id: 2,
     expired: false,
-    user_id: 1
+    user_id: 3
   },
   {
     id: 2,
     name: 'strawberries',
     done: false,
     food_id: 34,
-    section: 'fridge',
+    section_id: 1,
     expired: false,
-    user_id: 2
+    user_id: 1
   },
   {
     id: 3,
     name: 'Black beans',
     done: false,
     food_id: 6,
-    section: 'pantry',
+    section_id: 3,
     expired: false,
-    user_id: 3
+    user_id: 4
+  },
+  {
+    id: 4,
+    name: 'Kombucha tea',
+    done: false,
+    food_id: 112,
+    section_id: 1,
+    expired: false,
+    user_id: 2
   }
 ];

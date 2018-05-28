@@ -21,7 +21,9 @@ export default class SectionsList extends Component {
       name={item.name}
       icon={item.icon}
       iconStyle={item.style}
-      onPress={this._onSeeItems}
+      onPress={() =>
+        this.props.navigation.navigate('ItemsList', { section_id: item.id })
+      }
     />
   );
 
@@ -40,7 +42,7 @@ export default class SectionsList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flex: 1,
     justifyContent: 'flex-start',
     backgroundColor: '#F5FCFF'
   }

@@ -47,7 +47,7 @@ export const Tabs = createBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home'
-        // tabBarIcon: ({ tintColor }) => <Icon name="open-book" type="entypo" size={28} color={tintColor} />
+        // tabBarIcon: ({ tintColor }) => <Icon name="o" type="entypo" size={28} color={tintColor} />
       }
     },
     Search: {
