@@ -1,15 +1,16 @@
+import _ from 'lodash';
+import 'whatwg-fetch';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { items } from '../config/data';
-import _ from 'lodash';
 import { dataset } from '../config/urls';
-import 'whatwg-fetch';
 import InfoCard from '../components/InfoCard';
+import { toCapital } from '../helpers/toCapital';
 
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('name', 'NO-NAME')
+      title: toCapital(navigation.getParam('name', 'NO-NAME'))
     };
   };
 
@@ -45,12 +46,8 @@ export default class ItemInfo extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <InfoCard
-          title="General Info"
-          name={this.state.item.name}
-          section={this.state.item.section_id}
-          dateAdded={this.state.item.createdAt}
-        />
+        <InfoCard title="General Information" />
+        <InfoCard title="Tips" />
       </View>
     );
   }

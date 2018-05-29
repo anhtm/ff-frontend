@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { items } from '../config/data';
+import CustomTextInput from './CustomTextInput';
 
 export default class SectionItem extends Component {
   render() {
     return (
       <View style={styles.rowContainer}>
-        <Icon
-          style={styles.thumbnail}
-          name={this.props.icon}
-          type={this.props.iconStyle}
-        />
         <View style={styles.rowText}>
           <Text style={styles.title} ellipsizeMode={'tail'}>
             {this.props.title}
           </Text>
-          <Text style={styles.text}>{this.props.name}</Text>
-          <Text style={styles.text}>{this.props.section}</Text>
-          <Text style={styles.text}>{this.props.dateAdded}</Text>
-          <Text style={styles.text}>{this.props.expiresIn}</Text>
         </View>
       </View>
     );
@@ -59,11 +45,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
     color: '#777'
-  },
-  thumbnail: {
-    flex: 1,
-    height: undefined,
-    width: undefined
   },
   rowText: {
     flex: 4,

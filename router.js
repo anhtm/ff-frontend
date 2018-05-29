@@ -50,29 +50,42 @@ export const Tabs = createBottomTabNavigator(
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home'
-        // tabBarIcon: ({ tintColor }) => <Icon name="o" type="entypo" size={28} color={tintColor} />
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="check" type="entypo" size={28} color={tintColor} />
+        )
       }
     },
     Search: {
       screen: SearchItemStack,
       navigationOptions: {
-        tabBarLabel: 'Search'
-        // tabBarIcon: ({ tintColor }) => <Icon name="ios-add-circle-outline" type="ionicon" size={28} color={tintColor} />
+        tabBarLabel: 'Search',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="search" type="feather" size={28} color={tintColor} />
+        )
       }
     },
     Setting: {
       screen: Setting,
       navigationOptions: {
-        tabBarLabel: 'Setting'
-        // tabBarIcon: ({ tintColor }) => <Icon name="list" type="entypo" size={28} color={tintColor} />
+        tabBarLabel: 'Setting',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="settings" type="feather" size={28} color={tintColor} />
+        )
       }
     },
     Section: {
       screen: SectionStack,
       navigationOptions: {
-        tabBarLabel: 'Inventory'
-        // tabBarIcon: ({ tintColor }) => <Icon name="ios-person-outline" type="ionicon" size={28} color={tintColor} />
+        tabBarLabel: 'Inventory',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="heart-box"
+            type="material-community"
+            size={28}
+            color={tintColor}
+          />
+        )
       }
     }
   },
