@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import 'whatwg-fetch';
 import { backend } from './src/config/urls';
 import { Tabs } from './router.js';
+
 export default class App extends React.Component {
   state = {
     users: []
@@ -32,7 +33,6 @@ export default class App extends React.Component {
   // }
 
   render() {
-    // console.log(this.state);
     return <Tabs />;
   }
 }

@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  TextInput
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { items } from '../config/data';
 
 export default class SectionItem extends Component {
   render() {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
-        <View style={styles.rowContainer}>
-          <Icon
-            style={styles.thumbnail}
-            name={this.props.icon}
-            type={this.props.iconStyle}
-          />
-          <View style={styles.rowText}>
-            <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
-              {this.props.name}
-            </Text>
-          </View>
+      <View style={styles.rowContainer}>
+        <Icon
+          style={styles.thumbnail}
+          name={this.props.icon}
+          type={this.props.iconStyle}
+        />
+        <View style={styles.rowText}>
+          <Text style={styles.title} ellipsizeMode={'tail'}>
+            {this.props.title}
+          </Text>
+          <Text style={styles.text}>{this.props.name}</Text>
+          <Text style={styles.text}>{this.props.section}</Text>
+          <Text style={styles.text}>{this.props.dateAdded}</Text>
+          <Text style={styles.text}>{this.props.expiresIn}</Text>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -28,7 +36,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     backgroundColor: '#FFF',
-    height: 75,
+    height: 150,
     padding: 10,
     marginRight: 10,
     marginLeft: 10,
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingLeft: 10,
-    paddingTop: 15,
+    paddingTop: 5,
     fontSize: 16,
     fontWeight: 'bold',
     color: '#777'

@@ -4,9 +4,16 @@ import { items } from '../config/data';
 import SectionItem from '../components/SectionItem';
 
 export default class ItemsList extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('section_name', 'NO-NAME')
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
+      // TODO: selectedItems will be replaced by query to backen
       items: items,
       selectedItems: []
     };
@@ -16,7 +23,11 @@ export default class ItemsList extends Component {
     <SectionItem
       name={item.name}
       onPress={() =>
-        this.props.navigation.navigate('ItemInfo', { id: item.id })
+        this.props.navigation.navigate('ItemInfo', {
+          id: item.id,
+          food_id: item.food_id,
+          name: item.name
+        })
       }
     />
   );
@@ -37,10 +48,8 @@ export default class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Items List</Text>
         <FlatList
           data={this.state.selectedItems}
           renderItem={this._renderItem}
@@ -54,12 +63,6 @@ export default class ItemsList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: '#F5FCFF'
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
   }
 });

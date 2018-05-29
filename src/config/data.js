@@ -51,36 +51,40 @@ export const items = [
     id: 1,
     name: 'chicken',
     done: true,
-    food_id: 6,
+    food_id: 113,
     section_id: 2,
     expired: false,
-    user_id: 3
+    user_id: 3,
+    createdAt: '05/28/2018'
   },
   {
     id: 2,
     name: 'strawberries',
     done: false,
-    food_id: 34,
+    food_id: 481,
     section_id: 1,
-    expired: false,
-    user_id: 1
+    expired: true,
+    user_id: 1,
+    createdAt: '05/28/2018'
   },
   {
     id: 3,
-    name: 'Black beans',
+    name: 'ham',
     done: false,
-    food_id: 6,
+    food_id: 108,
     section_id: 3,
     expired: false,
-    user_id: 4
+    user_id: 4,
+    createdAt: '05/28/2018'
   },
   {
     id: 4,
-    name: 'Kombucha tea',
+    name: 'kimchi',
     done: false,
-    food_id: 112,
+    food_id: 493,
     section_id: 1,
     expired: false,
-    user_id: 2
+    user_id: 2,
+    createdAt: '05/28/2018'
   }
 ];

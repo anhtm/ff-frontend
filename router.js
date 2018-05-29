@@ -14,6 +14,7 @@ import Setting from './src/screens/Setting';
 // import Space from './src/screens/Space';
 import ItemsList from './src/screens/ItemsList';
 import SectionsList from './src/screens/SectionsList';
+import ItemInfo from './src/screens/ItemInfo';
 
 let screen = Dimensions.get('window');
 
@@ -38,6 +39,9 @@ export const SectionStack = createStackNavigator({
   },
   ItemsList: {
     screen: ItemsList
+  },
+  ItemInfo: {
+    screen: ItemInfo
   }
 });
 
