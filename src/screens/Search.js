@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import CustomSearchBar from '../components/SearchBar';
-import { food_data } from '../config/data';
 import { contains, getFoodData } from '../helpers/fetchStimulate';
-import SectionItem from '../components/SectionItem';
 import _ from 'lodash';
+import SearchResults from '../components/SearchResults';
 
 export default class Search extends Component {
   constructor(props) {
@@ -51,26 +44,13 @@ export default class Search extends Component {
     this.setState({ query: formatQuery, data }, () => this.makeRemoteRequest());
   };
 
-  _renderItem = ({ item }) => (
-    <SectionItem
-      name={item.name}
-      subtitle={item.name_subtitle}
-      onPress={() =>
-        this.props.navigation.navigate('Result', { food_id: item.id })
-      }
-    />
-  );
-
-  _keyExtractor = (item, index) => index.toString();
-
   render() {
     return (
       <View style={styles.container}>
         <CustomSearchBar onChangeText={this.handleSearch} />
-        <FlatList
+        <SearchResults
           data={this.state.data}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
+          navigation={this.props.navigation}
         />
       </View>
     );
