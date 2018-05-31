@@ -17,6 +17,7 @@ export default class SectionItem extends Component {
             <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
               {this.props.name}
             </Text>
+            <Text style={styles.text}> {this.props.subtitle} </Text>
           </View>
         </View>
       </TouchableOpacity>

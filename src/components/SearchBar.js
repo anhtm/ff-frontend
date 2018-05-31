@@ -11,7 +11,7 @@ export default class CustomSearchBar extends Component {
           lightTheme
           showLoading
           searchIcon={{ size: 24 }}
-          onChangeText={this.props.onChange}
+          onChangeText={this.props.onChangeText}
           onClear={this.props.onClear}
           placeholder="Type Here..."
         />

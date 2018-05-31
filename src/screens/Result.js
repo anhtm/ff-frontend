@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class Result extends Component {
   render() {
+    console.log(this.props.navigation.getParam('food_id', 'NO-FoodId'));
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Result</Text>
