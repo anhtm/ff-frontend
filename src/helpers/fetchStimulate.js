@@ -1,5 +1,8 @@
 import _ from 'lodash';
-import { food_data } from '../config/food_dataset';
+import * as food_data from '../config/full_dataset.json';
+
+const product = food_data.product;
+const category = food_data.category;
 
 export const contains = (
   { name, name_subtitle = '', keywords = '' },
@@ -16,17 +19,44 @@ export const contains = (
   return false;
 };
 
-const limit = 3;
-export const getFoodData = (query = '') => {
+export const getCategory = category_id => {
+  return new Promise((resolve, reject) => {
+    if (id !== 0) {
+      resolve(
+        _.find(category, function(item) {
+          return item.id === id;
+        })
+      );
+    } else {
+      reject();
+    }
+  });
+};
+
+export const getFoodItem = id => {
+  return new Promise((resolve, reject) => {
+    if (id !== 0) {
+      resolve(
+        _.find(product, function(item) {
+          return item.id === id;
+        })
+      );
+    } else {
+      reject();
+    }
+  });
+};
+
+export const getFoodData = (limit = 20, query = '') => {
   return new Promise((resolve, reject) => {
     if (query.length === 0) {
-      resolve(food_data);
+      resolve(_.take(product, 20));
     } else {
       const formattedQuery = query.toLowerCase();
-      const results = _.filter(food_data, item => {
+      const results = _.filter(product, item => {
         return contains(item, formattedQuery);
       });
-      resolve(results);
+      resolve(_.take(results, 20));
     }
   });
 };

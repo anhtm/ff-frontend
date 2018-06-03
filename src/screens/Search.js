@@ -23,7 +23,7 @@ export default class Search extends Component {
 
   makeRemoteRequest = _.debounce(() => {
     this.setState({ isLoading: true });
-    getFoodData(this.state.query)
+    getFoodData(20, this.state.query)
       .then(items => {
         this.setState({
           isLoading: false,

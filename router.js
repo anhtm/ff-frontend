@@ -3,7 +3,8 @@ import { Dimensions, Platform } from 'react-native';
 import {
   createStackNavigator,
   TabNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -11,10 +12,11 @@ import Home from './src/screens/Home';
 import Result from './src/screens/Result';
 import Search from './src/screens/Search';
 import Setting from './src/screens/Setting';
-// import Space from './src/screens/Space';
 import ItemsList from './src/screens/ItemsList';
 import SectionsList from './src/screens/SectionsList';
 import ItemInfo from './src/screens/ItemInfo';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
 
 let screen = Dimensions.get('window');
 
@@ -45,7 +47,22 @@ export const SectionStack = createStackNavigator({
   }
 });
 
-export const Tabs = createBottomTabNavigator(
+export const SignedOutLayout = createStackNavigator({
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: {
+      title: 'Sign Up'
+    }
+  },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {
+      title: 'Sign In'
+    }
+  }
+});
+
+export const SignedInLayout = createBottomTabNavigator(
   {
     Home: {
       screen: Home,
@@ -95,13 +112,18 @@ export const Tabs = createBottomTabNavigator(
   }
 );
 
-// export const createRootNavigator = () => {
-//   return createStackNavigator({
-//     Tabs: {
-//       screen: Tabs,
-//       navigationOptions: {
-//         gesturesEnabled: false
-//       }
-//     }
-//   });
-// };
+export const createRootNavigator = (signedIn = false) => {
+  return createSwitchNavigator(
+    {
+      SignedInLayout: {
+        screen: SignedInLayout
+      },
+      SignedOutLayout: {
+        screen: SignedOutLayout
+      }
+    },
+    {
+      initialRouteName: signedIn ? 'SignedInLayout' : 'SignedOutLayout'
+    }
+  );
+};

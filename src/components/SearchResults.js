@@ -8,7 +8,10 @@ export default class SearchResults extends Component {
       name={item.name}
       subtitle={item.name_subtitle}
       onPress={() =>
-        this.props.navigation.navigate('Result', { food_id: item.id })
+        this.props.navigation.navigate('Result', {
+          food_id: item.id,
+          name: item.name
+        })
       }
     />
   );
