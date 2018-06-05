@@ -7,13 +7,17 @@ export default class CustomInput extends Component {
     super(props);
   }
   render() {
-    const { label, placeholder, onChange } = this.props;
+    const { label, placeholder, onChange, secureTextEntry } = this.props;
     return (
       <View style={styles.formContainer}>
         <FormLabel style={styles.text}>{label}</FormLabel>
 
         <View style={styles.inputWrapper}>
-          <FormInput placeholder={placeholder} onChangeText={onChange} />
+          <FormInput
+            placeholder={placeholder}
+            onChangeText={onChange}
+            secureTextEntry={secureTextEntry}
+          />
         </View>
       </View>
     );

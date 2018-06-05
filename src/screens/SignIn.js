@@ -11,6 +11,7 @@ import { onSignIn } from '../authentication/auth';
 import { login, generateData } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
+import AuthForm from '../components/AuthForm';
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -61,36 +62,29 @@ export default class SignIn extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
-        <Card>
-          <FormLabel>Email</FormLabel>
-          <FormInput
-            placeholder="Email address..."
-            onChangeText={text => this.setState({ email: text })}
-          />
+        <AuthForm
+          isSignIn={true}
+          email={this.state.email}
+          password={this.state.password}
+          setParentState={newState => this.setState(newState)}
+        />
 
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            secureTextEntry
-            placeholder="Password..."
-            onChangeText={text => this.setState({ password: text })}
-          />
-
-          <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="#03A9F4"
-            title="SIGN IN"
-            onPress={this._onSubmit}
-          />
-          <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="transparent"
-            textStyle={{ color: '#bcbec1' }}
-            title="Sign Up"
-            onPress={() => this.props.navigation.navigate('SignUp')}
-          />
-        </Card>
+        <Button
+          buttonStyle={{ marginTop: 20 }}
+          backgroundColor="#03A9F4"
+          title="SIGN IN"
+          onPress={this._onSubmit}
+        />
+        <Button
+          buttonStyle={{ marginTop: 20 }}
+          backgroundColor="transparent"
+          textStyle={{ color: '#bcbec1' }}
+          title="Sign Up"
+          onPress={() => this.props.navigation.navigate('SignUp')}
+        />
       </View>
     );
   }

@@ -5,9 +5,9 @@ import { onSignIn } from '../authentication/auth';
 import { createUser, generateData } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
-import CustomInput from '../components/CustomTextInput';
+import AuthForm from '../components/AuthForm';
 
-export default class SignIn extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -22,21 +22,15 @@ export default class SignIn extends Component {
   }
 
   _onSubmit = () => {
-    let info = {
-      first_name: 'test',
-      last_name: 'signup',
-      email: 'test3@signup.com',
-      password: 'helloworld'
-    };
-
-    fetch(backend + 'user', generateData(info))
+    fetch(backend + 'user', generateData(this.formatData()))
       .then(res => {
         return res.json();
       })
       .then(jsondata => {
         console.log(jsondata);
         // TODO: alert user to check Email
-        this.props.navigation.navigate('SignedInLayout');
+        // TODO: navigate to a waiting screen.
+        // this.props.navigation.navigate('SignedInLayout');
         this.setState({ user: jsondata });
       })
       .catch(error => {
@@ -45,55 +39,44 @@ export default class SignIn extends Component {
       });
   };
 
+  formatData = () => {
+    const { first_name, last_name, email, password, confirm_pw } = this.state;
+    if (confirm_pw === password && password.length >= 8) {
+      return {
+        first_name: first_name.toLowerCase(),
+        last_name: last_name.toLowerCase(),
+        email: email.toLowerCase(),
+        password
+      };
+    }
+  };
+
   render() {
     console.log(this.state);
     return (
       <View style={styles.container}>
-        <Card>
-          <CustomInput
-            label="First Name"
-            placeholder="John"
-            onChange={text => this.setState({ first_name: text })}
-          />
+        <AuthForm
+          first_name={this.state.first_name}
+          last_name={this.state.last_name}
+          email={this.state.email}
+          password={this.state.password}
+          confirm_pw={this.state.confirm_pw}
+          setParentState={newState => this.setState(newState)}
+        />
 
-          <CustomInput
-            label="Last Name"
-            placeholder="Doe"
-            onChange={text => this.setState({ last_name: text })}
-          />
-
-          <CustomInput
-            label="Email"
-            placeholder="email@example.comohn"
-            onChange={text => this.setState({ email: text })}
-          />
-
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            secureTextEntry
-            onChangeText={text => this.setState({ passsword: text })}
-          />
-
-          <FormLabel>Confirm Password</FormLabel>
-          <FormInput
-            secureTextEntry
-            onChangeText={text => this.setState({ confirm_pw: text })}
-          />
-
-          <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="#03A9F4"
-            title="SIGN UP"
-            onPress={this._onSubmit}
-          />
-          <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="transparent"
-            textStyle={{ color: '#bcbec1' }}
-            title="Sign In"
-            onPress={() => this.props.navigation.navigate('SignIn')}
-          />
-        </Card>
+        <Button
+          buttonStyle={{ marginTop: 20 }}
+          backgroundColor="#03A9F4"
+          title="SIGN UP"
+          onPress={this._onSubmit}
+        />
+        <Button
+          buttonStyle={{ marginTop: 20 }}
+          backgroundColor="transparent"
+          textStyle={{ color: '#bcbec1' }}
+          title="Sign In"
+          onPress={() => this.props.navigation.navigate('SignIn')}
+        />
       </View>
     );
   }
