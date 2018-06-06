@@ -12,7 +12,12 @@ export default class AuthForm extends Component {
       password,
       confirm_pw,
       setParentState,
-      isSignIn
+      isSignIn,
+      msgEmail,
+      msgPassword,
+      msgFirstName,
+      msgLastName,
+      msgConfirmPw
     } = this.props;
 
     if (isSignIn) {
@@ -23,12 +28,14 @@ export default class AuthForm extends Component {
               label="Email"
               placeholder="email@example.com"
               onChange={text => setParentState({ email: text })}
+              message={msgEmail}
             />
 
             <CustomInput
               label="Password"
               secureTextEntry={true}
               onChange={text => setParentState({ password: text })}
+              message={msgPassword}
             />
           </Card>
         </View>
@@ -41,30 +48,35 @@ export default class AuthForm extends Component {
               label="First Name"
               placeholder="John"
               onChange={text => setParentState({ first_name: text })}
+              message={msgFirstName}
             />
 
             <CustomInput
               label="Last Name"
               placeholder="Doe"
               onChange={text => setParentState({ last_name: text })}
+              message={msgLastName}
             />
 
             <CustomInput
               label="Email"
               placeholder="email@example.com"
               onChange={text => setParentState({ email: text })}
+              message={msgEmail}
             />
 
             <CustomInput
               label="Password"
               secureTextEntry={true}
               onChange={text => setParentState({ password: text })}
+              message={msgPassword}
             />
 
             <CustomInput
               label="Confirm Password"
               secureTextEntry={true}
               onChange={text => setParentState({ confirm_pw: text })}
+              message={msgConfirmPw}
             />
           </Card>
         </View>

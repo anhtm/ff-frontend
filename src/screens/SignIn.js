@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {
-  Card,
-  Button,
-  FormLabel,
-  FormInput,
-  FormValidationMessage
-} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { onSignIn } from '../authentication/auth';
-import { login, generateData } from '../authentication/requests';
+import { generateData } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import AuthForm from '../components/AuthForm';

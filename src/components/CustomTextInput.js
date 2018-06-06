@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FormLabel, FormInput } from 'react-native-elements';
+import {
+  FormLabel,
+  FormInput,
+  FormValidationMessage
+} from 'react-native-elements';
 
 export default class CustomInput extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { label, placeholder, onChange, secureTextEntry } = this.props;
+    const {
+      label,
+      placeholder,
+      onChange,
+      secureTextEntry,
+      message
+    } = this.props;
     return (
       <View style={styles.formContainer}>
         <FormLabel style={styles.text}>{label}</FormLabel>
@@ -18,6 +28,7 @@ export default class CustomInput extends Component {
             onChangeText={onChange}
             secureTextEntry={secureTextEntry}
           />
+          <FormValidationMessage>{message}</FormValidationMessage>
         </View>
       </View>
     );
