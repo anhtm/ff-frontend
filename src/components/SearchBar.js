@@ -10,10 +10,12 @@ export default class CustomSearchBar extends Component {
           round
           lightTheme
           showLoading
+          clearIcon={{ size: 24, paddingRight: 10 }}
+          cancelIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           searchIcon={{ size: 24 }}
           onChangeText={this.props.onChangeText}
           onClear={this.props.onClear}
-          placeholder="Type Here..."
+          placeholder="Try 'chicken'"
         />
       </View>
     );

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { sections } from '../config/data';
 import { ListItem } from 'react-native-elements';
 import SectionItem from '../components/SectionItem';
+import { greyscale } from '../styles/colors';
 
 export default class SectionsList extends Component {
   constructor(props) {
@@ -46,6 +47,6 @@ export default class SectionsList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   }
 });

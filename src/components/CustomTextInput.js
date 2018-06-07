@@ -3,8 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import {
   FormLabel,
   FormInput,
-  FormValidationMessage
+  FormValidationMessage,
+  Input,
+  Icon
 } from 'react-native-elements';
+import { greyscale } from '../styles/colors';
 
 export default class CustomInput extends Component {
   constructor(props) {
@@ -19,41 +22,31 @@ export default class CustomInput extends Component {
       message
     } = this.props;
     return (
-      <View style={styles.formContainer}>
-        <FormLabel style={styles.text}>{label}</FormLabel>
-
-        <View style={styles.inputWrapper}>
-          <FormInput
-            placeholder={placeholder}
-            onChangeText={onChange}
-            secureTextEntry={secureTextEntry}
-          />
-          <FormValidationMessage>{message}</FormValidationMessage>
-        </View>
+      <View style={styles.field}>
+        <FormInput
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          placeholder={label}
+          onChangeText={onChange}
+          secureTextEntry={secureTextEntry}
+        />
+        <FormValidationMessage>{message}</FormValidationMessage>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  // formContainer: {
-  //   flexDirection: 'row',
-  //   borderTopWidth: 0.5,
-  //   height: 50,
-  //   paddingHorizontal: 25
-  // },
-  // form: {
-  //   flex: 1,
-  //   paddingVertical: 25
-  // },
-  // textWrapper: {
-  //   flex: 3
-  // },
-  // text: {
-  //   paddingVertical: 15,
-  //   fontSize: 15
-  // },
-  // inputWrapper: {
-  //   flex: 4
-  // }
+  input: {
+    color: greyscale.lightAccent,
+    // opacity: 0.6,
+    paddingLeft: 20
+  },
+  inputContainer: {
+    backgroundColor: greyscale.darkShade,
+    borderRadius: 20
+  },
+  field: {
+    marginBottom: 10
+  }
 });

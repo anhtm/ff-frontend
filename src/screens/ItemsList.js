@@ -4,6 +4,7 @@ import { items } from '../config/data';
 import SectionItem from '../components/SectionItem';
 import { toCapital } from '../helpers/toCapital';
 import CustomButton from '../components/CustomButton';
+import { greyscale } from '../styles/colors';
 
 export default class ItemsList extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -68,6 +69,6 @@ export default class ItemsList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   }
 });

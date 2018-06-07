@@ -6,6 +6,7 @@ import { generateData } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import AuthForm from '../components/AuthForm';
+import { greyscale } from '../styles/colors';
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -68,14 +69,14 @@ export default class SignIn extends Component {
 
         <Button
           buttonStyle={{ marginTop: 20 }}
-          backgroundColor="#03A9F4"
+          backgroundColor={greyscale.main}
           title="SIGN IN"
           onPress={this._onSubmit}
         />
         <Button
           buttonStyle={{ marginTop: 20 }}
           backgroundColor="transparent"
-          textStyle={{ color: '#bcbec1' }}
+          textStyle={{ color: greyscale.lightAccent }}
           title="Sign Up"
           onPress={() => this.props.navigation.navigate('SignUp')}
         />
@@ -87,7 +88,7 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   },
   title: {
     fontSize: 20,

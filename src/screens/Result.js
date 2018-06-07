@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { getFoodItem, getCategory } from '../helpers/fetchStimulate';
 import SectionItem from '../components/SectionItem';
+import { greyscale } from '../styles/colors';
 
 export default class Result extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -68,7 +69,7 @@ export default class Result extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   },
   title: {
     fontSize: 20,

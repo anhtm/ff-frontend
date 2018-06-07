@@ -4,6 +4,7 @@ import CustomSearchBar from '../components/SearchBar';
 import { contains, getFoodData } from '../helpers/fetchStimulate';
 import _ from 'lodash';
 import SearchResults from '../components/SearchResults';
+import { greyscale } from '../styles/colors';
 
 export default class Search extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   },
   title: {
     fontSize: 18,

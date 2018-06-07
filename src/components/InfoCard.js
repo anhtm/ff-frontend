@@ -22,16 +22,12 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     backgroundColor: '#FFF',
-    height: 150,
+    height: 'auto',
     padding: 10,
     marginRight: 10,
     marginLeft: 10,
     marginTop: 10,
-    borderRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#CCC',
-    shadowOpacity: 1.0,
-    shadowRadius: 1
+    borderRadius: 5
   },
   title: {
     paddingLeft: 10,

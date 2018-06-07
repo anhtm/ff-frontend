@@ -8,6 +8,7 @@ import { backend } from '../config/urls';
 import AuthForm from '../components/AuthForm';
 import validate from 'validate.js';
 import { constraints } from '../helpers/validation';
+import { greyscale } from '../styles/colors';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -86,14 +87,14 @@ export default class SignUp extends Component {
 
         <Button
           buttonStyle={{ marginTop: 20 }}
-          backgroundColor="#03A9F4"
+          backgroundColor={greyscale.main}
           title="SIGN UP"
           onPress={this._onSubmit}
         />
         <Button
           buttonStyle={{ marginTop: 20 }}
           backgroundColor="transparent"
-          textStyle={{ color: '#bcbec1' }}
+          textStyle={{ color: greyscale.lightAccent }}
           title="Sign In"
           onPress={() => this.props.navigation.navigate('SignIn')}
         />
@@ -105,11 +106,6 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
+    backgroundColor: greyscale.lightShade
   }
 });

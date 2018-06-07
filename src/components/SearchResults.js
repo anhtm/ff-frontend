@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import SectionItem from '../components/SectionItem';
+import { ListItem } from 'react-native-elements';
+import { greyscale } from '../styles/colors';
 
 export default class SearchResults extends Component {
   _renderItem = ({ item }) => (
-    <SectionItem
-      name={item.name}
+    <ListItem
+      title={item.name}
+      titleStyle={styles.title}
       subtitle={item.name_subtitle}
+      subtitleStyle={styles.subtitle}
+      chevronColor={greyscale.lightAccent}
       onPress={() =>
         this.props.navigation.navigate('Result', {
           food_id: item.id,
@@ -30,3 +35,12 @@ export default class SearchResults extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  title: {
+    color: greyscale.darkShade
+  },
+  subtitle: {
+    color: greyscale.darkAccent
+  }
+});

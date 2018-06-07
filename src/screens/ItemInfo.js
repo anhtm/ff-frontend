@@ -6,6 +6,7 @@ import { items } from '../config/data';
 import { dataset } from '../config/urls';
 import InfoCard from '../components/InfoCard';
 import { toCapital } from '../helpers/toCapital';
+import { greyscale } from '../styles/colors';
 
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -56,6 +57,6 @@ export default class ItemInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   }
 });

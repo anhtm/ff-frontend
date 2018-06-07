@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { greyscale } from '../styles/colors';
 
 export default class Home extends Component {
   render() {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   },
   title: {
     fontSize: 20,
