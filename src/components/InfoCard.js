@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { items } from '../config/data';
-import CustomTextInput from './CustomTextInput';
+import { Card, Divider } from 'react-native-elements';
+import { greyscale } from '../styles/colors';
 
-export default class SectionItem extends Component {
+export default class InfoCard extends Component {
   render() {
+    const { title, text } = this.props;
     return (
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
           <Text style={styles.title} ellipsizeMode={'tail'}>
-            {this.props.title}
+            {title}
+          </Text>
+          <Text style={styles.text} ellipsizeMode={'tail'}>
+            {text}
           </Text>
         </View>
       </View>
@@ -21,7 +24,6 @@ export default class SectionItem extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
     height: 'auto',
     padding: 10,
     marginRight: 10,
@@ -34,13 +36,13 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#777'
+    color: greyscale.darkAccent
   },
   text: {
     paddingLeft: 10,
     marginTop: 5,
     fontSize: 14,
-    color: '#777'
+    color: greyscale.main
   },
   rowText: {
     flex: 4,

@@ -45,12 +45,7 @@ export default class ItemInfo extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <InfoCard title="General Information" />
-        <InfoCard title="Tips" />
-      </View>
-    );
+    return <View style={styles.container} />;
   }
 }
 

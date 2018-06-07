@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { getFoodItem, getCategory } from '../helpers/fetchStimulate';
+import { getFoodItem, categories } from '../helpers/fetchStimulate';
 import SectionItem from '../components/SectionItem';
+import InfoDetails from '../components/InfoDetails';
 import { greyscale } from '../styles/colors';
+import _ from 'lodash';
 
 export default class Result extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,8 +18,9 @@ export default class Result extends Component {
     this.state = {
       isLoading: false,
       item: {},
-      error: null,
-      category: {}
+      error: null
+      // categories: categories,
+      // category: {}
     };
   }
 
@@ -30,37 +33,31 @@ export default class Result extends Component {
     const food_id = this.props.navigation.getParam('food_id', 'NO-FoodId');
     getFoodItem(food_id)
       .then(item => {
-        this.setState(
-          {
-            item,
-            isLoading: false
-          },
-          () => {
-            getCategory(this.state.item.category_id).then(result => {
-              this.setState({
-                category: result
-              });
-            });
-          }
-        );
+        this.setState({
+          item,
+          isLoading: false
+        });
       })
       .catch(error => {
         this.setState({ error });
       });
   };
 
+  getItemCategory = () => {
+    _.find(this.state.categories, item => {
+      if (item.id === this.state.item.category_id) {
+        this.setState({ category: item });
+        return item;
+      }
+    });
+  };
+
   render() {
     console.log(this.state);
+    // TODO: conditional render food data
     return (
       <View style={styles.container}>
-        <SectionItem
-          name={'Subtitle'}
-          subtitle={this.state.item.name_subtitle}
-        />
-        <SectionItem
-          name={'Category'}
-          subtitle={this.state.category.category_name}
-        />
+        <InfoDetails item={this.state.item} />
       </View>
     );
   }

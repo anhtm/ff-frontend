@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as food_data from '../config/full_dataset.json';
 
 const product = food_data.product;
-const category = food_data.category;
+export const categories = food_data.category;
 
 export const contains = (
   { name, name_subtitle = '', keywords = '' },
@@ -23,7 +23,7 @@ export const getCategory = category_id => {
   return new Promise((resolve, reject) => {
     if (id !== 0) {
       resolve(
-        _.find(category, function(item) {
+        _.find(categories, function(item) {
           return item.id === id;
         })
       );
