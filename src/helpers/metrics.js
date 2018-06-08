@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const metricArray = [
+const metrics = [
   ['dop_pantry_metric', 'dop_pantry_min', 'dop_pantry_max'],
   ['pantry_metric', 'pantry_min', 'pantry_max', 'pantry_tips'],
   ['dop_freeze_metric', 'dop_freeze_min', 'dop_freeze_max', 'dop_freeze_tips'],
@@ -29,17 +29,37 @@ const metricArray = [
   ]
 ];
 
-export const metricValid = (item, keyMetric) => {
-  return _.includes(Object.keys(item), keyMetric);
+export const titles = {
+  dop_pantry: 'In pantry after date of purchase',
+  pantry: 'In pantry',
+  dop_freeze: 'In freezer after date of purchase',
+  freeze: 'In freezer',
+  dop_refrigerate: 'In refrigerate after date of purchase',
+  refrigerate: 'In refrigerate',
+  refrigerate_after_opening: 'In refrigerate after opening',
+  refrigerate_after_thawing: 'In refrigerate after thawing'
+};
+
+const metricValid = (item, metricKey) => {
+  return _.includes(Object.keys(item), metricKey);
 };
 
 export const getSections = item => {
   let result = [];
-
-  for (var i = 0; i < metricArray.length; i++) {
-    if (metricValid(item, metricArray[i][0])) {
-      result.push(metricArray[i]);
+  for (var i = 0; i < metrics.length; i++) {
+    if (metricValid(item, metrics[i][0])) {
+      result.push(metrics[i]);
     }
   }
   return result;
+};
+
+export const formatData = (metric, min = undefined, max = undefined) => {
+  if (min === max) {
+    return `${min} ${metric}`;
+  } else if (min < max) {
+    return `From ${min} to ${max} ${metric}`;
+  } else if (!min) {
+    return `${metric}`;
+  }
 };
