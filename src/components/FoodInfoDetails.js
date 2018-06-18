@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import { getSections, titles, formatData } from '../helpers/metrics';
-import InfoCard from './InfoCard';
 import { greyscale } from '../styles/colors';
 import _ from 'lodash';
 
 export default class InfoDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   mergeGroupWithData = () => {
     const { item } = this.props;
     let merged = {};
@@ -25,16 +20,18 @@ export default class InfoDetails extends Component {
   };
 
   render() {
-    let results = this.mergeGroupWithData();
-    console.log('results', results);
+    const results = this.mergeGroupWithData();
+    const { category } = this.props;
     return (
       <ScrollView>
+        <View>
+          <Text style={styles.title}>Category</Text>
+          <Text style={styles.text}>{category.category_name}</Text>
+        </View>
         {Object.keys(results).map((key, i) => {
           return (
-            <View>
-              <Text key={i} style={styles.title}>
-                {titles[key]}
-              </Text>
+            <View key={i}>
+              <Text style={styles.title}>{titles[key]}</Text>
               <Text style={styles.text}>
                 {formatData(
                   results[key][Object.keys(results[key])[0]],

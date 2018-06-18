@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { getFoodItem, categories } from '../helpers/fetchStimulate';
+import { Button, Icon } from 'react-native-elements';
+import { getFoodItem, categories } from '../helpers/fetchDataset';
 import SectionItem from '../components/SectionItem';
-import InfoDetails from '../components/InfoDetails';
+import FoodInfoDetails from '../components/FoodInfoDetails';
 import { greyscale } from '../styles/colors';
+
 import _ from 'lodash';
 
 export default class Result extends Component {
@@ -18,9 +20,8 @@ export default class Result extends Component {
     this.state = {
       isLoading: false,
       item: {},
-      error: null
-      // categories: categories,
-      // category: {}
+      error: null,
+      category: {}
     };
   }
 
@@ -38,26 +39,40 @@ export default class Result extends Component {
           isLoading: false
         });
       })
+      .then(() => {
+        this.getItemCategory();
+      })
       .catch(error => {
         this.setState({ error });
       });
   };
 
   getItemCategory = () => {
-    _.find(this.state.categories, item => {
+    _.find(categories, item => {
       if (item.id === this.state.item.category_id) {
         this.setState({ category: item });
-        return item;
       }
     });
   };
 
   render() {
     console.log(this.state);
-    // TODO: conditional render food data
     return (
       <View style={styles.container}>
-        <InfoDetails item={this.state.item} />
+        <FoodInfoDetails
+          item={this.state.item}
+          category={this.state.category}
+        />
+        <Button
+          iconRight={{ name: 'cake', type: 'entypo' }}
+          title="Add to Inventory"
+          backgroundColor={greyscale.main}
+          onPress={() => {
+            this.props.navigation.navigate('AddItem', {
+              name: this.state.item.name
+            });
+          }}
+        />
       </View>
     );
   }

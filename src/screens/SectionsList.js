@@ -11,10 +11,6 @@ export default class SectionsList extends Component {
     this.state = { sections: sections };
   }
 
-  _onSeeItems = () => {
-    this.props.navigation.navigate('ItemsList');
-  };
-
   _keyExtractor = (item, index) => index.toString();
 
   _renderItem = ({ item }) => (

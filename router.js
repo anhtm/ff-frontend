@@ -17,6 +17,7 @@ import SectionsList from './src/screens/SectionsList';
 import ItemInfo from './src/screens/ItemInfo';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
+import AddItem from './src/screens/AddItem';
 
 let screen = Dimensions.get('window');
 
@@ -29,6 +30,9 @@ export const SearchItemStack = createStackNavigator({
   },
   Result: {
     screen: Result
+  },
+  AddItem: {
+    screen: AddItem
   }
 });
 

@@ -59,7 +59,7 @@ export const formatData = (metric, min = undefined, max = undefined) => {
     return `${min} ${metric}`;
   } else if (min < max) {
     return `From ${min} to ${max} ${metric}`;
-  } else if (!min) {
+  } else if (!min || !max) {
     return `${metric}`;
   }
 };

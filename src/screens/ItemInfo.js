@@ -1,11 +1,12 @@
-import _ from 'lodash';
 import 'whatwg-fetch';
+import { StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { items } from '../config/data';
-import { dataset } from '../config/urls';
-import InfoCard from '../components/InfoCard';
+import ItemInfoDetails from '../components/ItemInfoDetails';
 import { toCapital } from '../helpers/toCapital';
+import { backend } from '../config/urls';
+import { dataWithToken } from '../authentication/requests';
+import { getToken } from '../authentication/auth';
+import { getFoodItem } from '../helpers/fetchDataset';
 import { greyscale } from '../styles/colors';
 
 export default class ItemInfo extends Component {
@@ -18,34 +19,52 @@ export default class ItemInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: items,
       item: {},
-      food_info: {}
+      food_info: {},
+      error: null
     };
   }
 
   componentDidMount() {
-    const item_id = this.props.navigation.getParam('id', 'NO-ID');
-    const item_index = _.findIndex(this.state.items, { id: item_id });
-    this.setState({ item: this.state.items[item_index] });
-    return fetch(
-      dataset +
-        'product?id=' +
-        this.props.navigation.getParam('food_id', 'NO-FoodId')
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(resData => {
-        this.setState({ food_info: resData });
-      })
-      .catch(err => {
-        throw err;
-      });
+    this.fetchItemDetails();
+    this.getFoodInfo();
   }
 
+  fetchItemDetails = () => {
+    const item_id = this.props.navigation.getParam('id', 'NO-ID');
+    const path = `${backend}item/${item_id}`;
+    getToken().then(token => {
+      fetch(path, dataWithToken(token))
+        .then(res => {
+          return res.json();
+        })
+        .then(json => {
+          this.setState({ item: json });
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+    });
+  };
+
+  getFoodInfo = () => {
+    const food_id = this.props.navigation.getParam('food_id', 'NO-FoodID');
+    getFoodItem(food_id)
+      .then(item => {
+        this.setState({ food_info: item });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  };
+
   render() {
-    return <View style={styles.container} />;
+    console.log(this.state);
+    return (
+      <View style={styles.container}>
+        <ItemInfoDetails item={this.state.item} />
+      </View>
+    );
   }
 }
 

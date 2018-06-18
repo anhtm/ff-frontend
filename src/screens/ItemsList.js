@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { items } from '../config/data';
-import SectionItem from '../components/SectionItem';
-import { toCapital } from '../helpers/toCapital';
-import CustomButton from '../components/CustomButton';
-import { greyscale } from '../styles/colors';
+import { StyleSheet, Text, View } from 'react-native';
+import 'whatwg-fetch';
+import { backend } from '../config/urls';
+import { dataWithToken } from '../authentication/requests';
+import { getToken } from '../authentication/auth';
+import ItemsListDetails from '../components/ItemsListDetails';
 
 export default class ItemsList extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,59 +16,43 @@ export default class ItemsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TODO: selectedItems will be replaced by query to backen
-      items: items,
-      selectedItems: []
+      items: [],
+      error: null
     };
   }
 
-  _renderItem = ({ item }) => (
-    <SectionItem
-      name={toCapital(item.name)}
-      onPress={() =>
-        this.props.navigation.navigate('ItemInfo', {
-          id: item.id,
-          food_id: item.food_id,
-          name: item.name
+  fetchItems = () => {
+    const section_id = this.props.navigation.getParam('section_id', 'NO-ID');
+    const path = `${backend}items/section/${section_id}`;
+    getToken().then(token => {
+      fetch(path, dataWithToken(token))
+        .then(res => {
+          return res.json();
         })
-      }
-    />
-  );
-
-  _keyExtractor = (item, index) => index.toString();
+        .then(json => {
+          this.setState({ items: json });
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+    });
+  };
 
   componentDidMount() {
-    const chosen_id = this.props.navigation.getParam('section_id', 'NO-ID');
-    let selectedItems = [];
-    for (var i = 0; i < this.state.items.length; i++) {
-      if (this.state.items[i].section_id == chosen_id) {
-        selectedItems.push(this.state.items[i]);
-      }
-    }
-    this.setState({ selectedItems });
+    this.fetchItems();
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.selectedItems}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
+    console.log(this.state);
+    if (!this.state.error) {
+      return (
+        <ItemsListDetails
+          navigation={this.props.navigation}
+          data={this.state.items}
         />
-        <CustomButton
-          iconName="cake"
-          iconStyle="entypo"
-          onPress={() => this.props.navigation.navigate('Search')}
-        />
-      </View>
-    );
+      );
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: greyscale.lightShade
-  }
-});
+const styles = StyleSheet.create({});

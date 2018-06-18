@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import CustomSearchBar from '../components/SearchBar';
-import { contains, getFoodData } from '../helpers/fetchStimulate';
+import { contains, getFoodData } from '../helpers/fetchDataset';
 import _ from 'lodash';
 import SearchResults from '../components/SearchResults';
 import { greyscale } from '../styles/colors';

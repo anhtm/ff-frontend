@@ -3,17 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Card, Divider } from 'react-native-elements';
 import { greyscale } from '../styles/colors';
 
-export default class InfoCard extends Component {
+export default class ItemInfoDetails extends Component {
   render() {
-    const { title, text } = this.props;
+    const { item } = this.props;
     return (
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
           <Text style={styles.title} ellipsizeMode={'tail'}>
-            {title}
+            {item.name}
           </Text>
           <Text style={styles.text} ellipsizeMode={'tail'}>
-            {text}
+            Section: {item.section_id}
           </Text>
         </View>
       </View>
