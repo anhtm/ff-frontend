@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ItemInfoDetails from '../components/ItemInfoDetails';
 import { toCapital } from '../helpers/toCapital';
 import { backend } from '../config/urls';
-import { dataWithToken } from '../authentication/requests';
+import { getDataWithToken } from '../authentication/requests';
 import { getToken } from '../authentication/auth';
 import { getFoodItem } from '../helpers/fetchDataset';
 import { greyscale } from '../styles/colors';
@@ -34,7 +34,7 @@ export default class ItemInfo extends Component {
     const item_id = this.props.navigation.getParam('id', 'NO-ID');
     const path = `${backend}item/${item_id}`;
     getToken().then(token => {
-      fetch(path, dataWithToken(token))
+      fetch(path, getDataWithToken(token))
         .then(res => {
           return res.json();
         })

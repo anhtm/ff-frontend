@@ -14,7 +14,7 @@ export const generateData = info => {
   };
 };
 
-export const dataWithToken = token => {
+export const getDataWithToken = token => {
   return {
     method: 'GET',
     headers: {
@@ -26,9 +26,22 @@ export const dataWithToken = token => {
   };
 };
 
-export const getRemoteRequest = (path, next) => {
+export const sendDataWithToken = (info, token) => {
+  return {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'x-auth': token
+    },
+    mode: 'cors',
+    body: JSON.stringify(info)
+  };
+};
+
+export const getRemoteRequest = path => {
   getToken().then(token => {
-    return fetch(path, dataWithToken(token));
+    fetch(path, dataWithToken(token));
   });
 };
 

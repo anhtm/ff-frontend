@@ -69,7 +69,8 @@ export default class Result extends Component {
           backgroundColor={greyscale.main}
           onPress={() => {
             this.props.navigation.navigate('AddItem', {
-              name: this.state.item.name
+              name: this.state.item.name,
+              food_id: this.state.item.id
             });
           }}
         />

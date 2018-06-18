@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
-import { dataWithToken } from '../authentication/requests';
+import { getDataWithToken } from '../authentication/requests';
 import { getToken } from '../authentication/auth';
 import ItemsListDetails from '../components/ItemsListDetails';
 
@@ -25,7 +25,7 @@ export default class ItemsList extends Component {
     const section_id = this.props.navigation.getParam('section_id', 'NO-ID');
     const path = `${backend}items/section/${section_id}`;
     getToken().then(token => {
-      fetch(path, dataWithToken(token))
+      fetch(path, getDataWithToken(token))
         .then(res => {
           return res.json();
         })

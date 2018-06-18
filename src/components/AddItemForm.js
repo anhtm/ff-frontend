@@ -23,27 +23,29 @@ export default class AddItemForm extends Component {
   };
 
   render() {
-    const { setParentState, section_id, date_added } = this.props;
+    const { setParentState, section_id, date_added, name } = this.props;
     return (
       <Form>
-        <Text>{section_id}</Text>
-        <Text>{this.formatDate(date_added)}</Text>
+        <CustomInput
+          label="Name"
+          placeholder="ie: Frozen bananas"
+          onChange={text => setParentState({ name: text })}
+        />
 
         <Picker
           iosHeader="Select one"
           mode="dropdown"
           selectedValue={section_id}
-          onValueChange={section_id =>
-            this.props.setParentState({ section_id })
-          }
+          onValueChange={section_id => setParentState({ section_id })}
         >
           {this._renderSections()}
         </Picker>
+
         <DatePicker
           date={date_added}
           style={styles.DatePicker}
           customStyles={CustomStyles}
-          format="MM-DD-YYYY"
+          format="YYYY-MM-DD"
           mode="date"
           minDate={new Date(2018, 1, 1)}
           maxDate={new Date(2025, 12, 31)}
