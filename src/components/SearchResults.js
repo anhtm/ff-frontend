@@ -14,8 +14,7 @@ export default class SearchResults extends Component {
       chevronColor={greyscale.lightAccent}
       onPress={() =>
         this.props.navigation.navigate('Result', {
-          food_id: item.id,
-          name: item.name
+          item: item
         })
       }
     />

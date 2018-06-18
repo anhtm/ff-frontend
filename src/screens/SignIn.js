@@ -29,7 +29,6 @@ export default class SignIn extends Component {
     if (this.credentialsValid) {
       fetch(backend + 'login', generateData(creds))
         .then(res => {
-          console.log(res);
           if (!res.ok || res.status === 400) {
             // TODO: Do something when there is an error (400 bad request)
             console.warn('The credentials are invalid, please try again.');
@@ -57,7 +56,6 @@ export default class SignIn extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <AuthForm

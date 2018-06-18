@@ -12,43 +12,25 @@ import { greyscale } from '../styles/colors';
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: toCapital(navigation.getParam('name', 'NO-NAME'))
+      title: toCapital(navigation.getParam('item', 'no-item').name)
     };
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      item: {},
+      item: this.props.navigation.getParam('item', 'no-item'),
       food_info: {},
       error: null
     };
   }
 
   componentDidMount() {
-    this.fetchItemDetails();
     this.getFoodInfo();
   }
 
-  fetchItemDetails = () => {
-    const item_id = this.props.navigation.getParam('id', 'NO-ID');
-    const path = `${backend}item/${item_id}`;
-    getToken().then(token => {
-      fetch(path, getDataWithToken(token))
-        .then(res => {
-          return res.json();
-        })
-        .then(json => {
-          this.setState({ item: json });
-        })
-        .catch(error => {
-          this.setState({ error });
-        });
-    });
-  };
-
   getFoodInfo = () => {
-    const food_id = this.props.navigation.getParam('food_id', 'NO-FoodID');
+    const food_id = this.state.item.food_id;
     getFoodItem(food_id)
       .then(item => {
         this.setState({ food_info: item });
@@ -59,7 +41,6 @@ export default class ItemInfo extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <ItemInfoDetails item={this.state.item} />
@@ -74,3 +55,22 @@ const styles = StyleSheet.create({
     backgroundColor: greyscale.lightShade
   }
 });
+
+/*
+fetchItemDetails = () => {
+  const item_id = this.props.navigation.getParam('id', 'NO-ID');
+  const path = `${backend}item/${item_id}`;
+  getToken().then(token => {
+    fetch(path, getDataWithToken(token))
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.setState({ item: json });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  });
+};
+*/

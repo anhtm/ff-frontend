@@ -11,7 +11,7 @@ import { getToken } from '../authentication/auth';
 export default class AddItem extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `Adding ${navigation.getParam('name', 'No-Name')}`
+      title: `Adding ${navigation.getParam('item', 'no-item').name}`
     };
   };
 
@@ -20,7 +20,7 @@ export default class AddItem extends Component {
     this.state = {
       section_id: 1,
       date_added: new Date(),
-      name: this.props.navigation.getParam('name', ''),
+      name: this.props.navigation.getParam('item', '').name,
       error: null
     };
   }
@@ -31,7 +31,7 @@ export default class AddItem extends Component {
       name,
       section_id,
       date_added,
-      food_id: this.props.navigation.getParam('food_id', '')
+      food_id: this.props.navigation.getParam('item', '').id
     };
 
     console.log(info);
@@ -51,12 +51,14 @@ export default class AddItem extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
         <AddItemForm
           setParentState={newState => this.setState(newState)}
           section_id={this.state.section_id}
           date_added={this.state.date_added}
+          name={this.state.name}
         />
         <Button title="Add Item" onPress={this._onSubmit} />
       </View>

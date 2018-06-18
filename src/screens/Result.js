@@ -11,7 +11,7 @@ import _ from 'lodash';
 export default class Result extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('name', 'No-Name')
+      title: navigation.getParam('item', 'no-item').name
     };
   };
 
@@ -19,33 +19,15 @@ export default class Result extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      item: {},
+      item: this.props.navigation.getParam('item', 'no-item'),
       error: null,
       category: {}
     };
   }
 
   componentDidMount() {
-    this.fetchItem();
+    this.getItemCategory();
   }
-
-  fetchItem = () => {
-    this.setState({ isLoading: true });
-    const food_id = this.props.navigation.getParam('food_id', 'NO-FoodId');
-    getFoodItem(food_id)
-      .then(item => {
-        this.setState({
-          item,
-          isLoading: false
-        });
-      })
-      .then(() => {
-        this.getItemCategory();
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-  };
 
   getItemCategory = () => {
     _.find(categories, item => {
@@ -56,7 +38,6 @@ export default class Result extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <FoodInfoDetails
@@ -69,8 +50,7 @@ export default class Result extends Component {
           backgroundColor={greyscale.main}
           onPress={() => {
             this.props.navigation.navigate('AddItem', {
-              name: this.state.item.name,
-              food_id: this.state.item.id
+              item: this.state.item
             });
           }}
         />
@@ -90,3 +70,23 @@ const styles = StyleSheet.create({
     margin: 10
   }
 });
+
+/*
+fetchItem = () => {
+  this.setState({ isLoading: true });
+  const food_id = this.props.navigation.getParam('food_id', 'NO-FoodId');
+  getFoodItem(food_id)
+    .then(item => {
+      this.setState({
+        item,
+        isLoading: false
+      });
+    })
+    .then(() => {
+      this.getItemCategory();
+    })
+    .catch(error => {
+      this.setState({ error });
+    });
+};
+*/

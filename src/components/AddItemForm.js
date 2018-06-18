@@ -14,10 +14,6 @@ export default class AddItemForm extends Component {
     ));
   };
 
-  setDate(newDate) {
-    this.props.setParentState({ date_added: newDate });
-  }
-
   formatDate = date => {
     return date.toString();
   };
@@ -51,7 +47,7 @@ export default class AddItemForm extends Component {
           maxDate={new Date(2025, 12, 31)}
           androidMode={'spinner'}
           placeholder="Select Date"
-          onDateChange={date => this.setDate(date)}
+          onDateChange={date_added => setParentState({ date_added })}
         />
       </Form>
     );

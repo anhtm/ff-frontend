@@ -43,7 +43,6 @@ export default class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.state.error) {
       return (
         <ItemsListDetails

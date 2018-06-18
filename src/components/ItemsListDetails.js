@@ -11,9 +11,7 @@ export default class ItemsListDetails extends Component {
       name={toCapital(item.name)}
       onPress={() =>
         this.props.navigation.navigate('ItemInfo', {
-          id: item.id,
-          food_id: item.food_id,
-          name: item.name
+          item
         })
       }
     />

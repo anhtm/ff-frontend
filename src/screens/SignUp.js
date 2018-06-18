@@ -34,7 +34,6 @@ export default class SignUp extends Component {
         } else {
           console.log('Success');
         }
-        console.log('res', res);
         return res.json();
       })
       .then(json => {
@@ -71,7 +70,6 @@ export default class SignUp extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <ScrollView style={styles.container}>
         <AuthForm

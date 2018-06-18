@@ -44,25 +44,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
-
-// componentDidMount() {
-//   return fetch(backend + 'users', {
-//     method: 'GET',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/x-www-form-urlencoded'
-//     }
-//   })
-//     .then(res => {
-//       console.log('raw response: ' + res);
-//       return res.json();
-//     })
-//     .then(responseData => {
-//       console.log('JSON response: ' + responseData);
-//       this.setState({ users: responseData });
-//     })
-//     .catch(err => {
-//       console.log(err.message);
-//       throw err;
-//     });
-// }

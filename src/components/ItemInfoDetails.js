@@ -14,6 +14,7 @@ export default class ItemInfoDetails extends Component {
           </Text>
           <Text style={styles.text} ellipsizeMode={'tail'}>
             Section: {item.section_id}
+            food_id: {item.food_id}
           </Text>
         </View>
       </View>
