@@ -3,7 +3,8 @@ import { Dimensions, Platform } from 'react-native';
 import {
   createStackNavigator,
   TabNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -11,10 +12,12 @@ import Home from './src/screens/Home';
 import Result from './src/screens/Result';
 import Search from './src/screens/Search';
 import Setting from './src/screens/Setting';
-// import Space from './src/screens/Space';
 import ItemsList from './src/screens/ItemsList';
 import SectionsList from './src/screens/SectionsList';
 import ItemInfo from './src/screens/ItemInfo';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
+import AddItem from './src/screens/AddItem';
 
 let screen = Dimensions.get('window');
 
@@ -27,6 +30,9 @@ export const SearchItemStack = createStackNavigator({
   },
   Result: {
     screen: Result
+  },
+  AddItem: {
+    screen: AddItem
   }
 });
 
@@ -45,34 +51,62 @@ export const SectionStack = createStackNavigator({
   }
 });
 
-export const Tabs = createBottomTabNavigator(
+export const SignedOutLayout = createStackNavigator({
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: {
+      title: 'Sign Up'
+    }
+  },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {
+      title: 'Sign In'
+    }
+  }
+});
+
+export const SignedInLayout = createBottomTabNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home'
-        // tabBarIcon: ({ tintColor }) => <Icon name="o" type="entypo" size={28} color={tintColor} />
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="check" type="entypo" size={28} color={tintColor} />
+        )
       }
     },
     Search: {
       screen: SearchItemStack,
       navigationOptions: {
-        tabBarLabel: 'Search'
-        // tabBarIcon: ({ tintColor }) => <Icon name="ios-add-circle-outline" type="ionicon" size={28} color={tintColor} />
+        tabBarLabel: 'Search',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="search" type="feather" size={28} color={tintColor} />
+        )
       }
     },
     Setting: {
       screen: Setting,
       navigationOptions: {
-        tabBarLabel: 'Setting'
-        // tabBarIcon: ({ tintColor }) => <Icon name="list" type="entypo" size={28} color={tintColor} />
+        tabBarLabel: 'Setting',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="settings" type="feather" size={28} color={tintColor} />
+        )
       }
     },
     Section: {
       screen: SectionStack,
       navigationOptions: {
-        tabBarLabel: 'Inventory'
-        // tabBarIcon: ({ tintColor }) => <Icon name="ios-person-outline" type="ionicon" size={28} color={tintColor} />
+        tabBarLabel: 'Inventory',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="heart-box"
+            type="material-community"
+            size={28}
+            color={tintColor}
+          />
+        )
       }
     }
   },
@@ -82,13 +116,18 @@ export const Tabs = createBottomTabNavigator(
   }
 );
 
-// export const createRootNavigator = () => {
-//   return createStackNavigator({
-//     Tabs: {
-//       screen: Tabs,
-//       navigationOptions: {
-//         gesturesEnabled: false
-//       }
-//     }
-//   });
-// };
+export const createRootNavigator = (signedIn = false) => {
+  return createSwitchNavigator(
+    {
+      SignedInLayout: {
+        screen: SignedInLayout
+      },
+      SignedOutLayout: {
+        screen: SignedOutLayout
+      }
+    },
+    {
+      initialRouteName: signedIn ? 'SignedInLayout' : 'SignedOutLayout'
+    }
+  );
+};
