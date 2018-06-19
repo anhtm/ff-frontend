@@ -1,76 +1,90 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import { sections } from '../config/data';
-import { Picker, Form } from 'native-base';
+import { Text, View, StyleSheet } from 'react-native';
+import { greyscale, colors } from '../styles/colors';
 import CustomInput from '../components/CustomTextInput';
-import DatePicker from 'react-native-datepicker';
-import { greyscale } from '../styles/colors';
+import FavoriteBox from '../components/FavoriteBox';
+import SectionPicker from '../components/SectionPicker';
+import DatePickerItem from '../components/DatePickerItem';
 
 export default class AddItemForm extends Component {
-  _renderSections = () => {
-    return sections.map(section => (
-      <Picker.Item key={section.id} label={section.name} value={section.id} />
-    ));
-  };
-
-  formatDate = date => {
-    return date.toString();
-  };
-
   render() {
-    const { setParentState, section_id, date_added, name } = this.props;
+    const {
+      setParentState,
+      section_id,
+      date_added,
+      name,
+      isFavorite
+    } = this.props;
+
     return (
-      <Form>
-        <CustomInput
-          label="Name"
-          placeholder="ie: Frozen bananas"
-          onChange={text => setParentState({ name: text })}
-        />
+      <View style={styles.form}>
+        <View style={styles.fieldContainer}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>New Item</Text>
+          </View>
+          <View style={styles.inputWrapper}>
+            <CustomInput
+              label={name}
+              placeholder="ie: Frozen bananas"
+              onChange={text => setParentState({ name: text })}
+            />
+          </View>
+        </View>
 
-        <Picker
-          iosHeader="Select one"
-          mode="dropdown"
-          selectedValue={section_id}
-          onValueChange={section_id => setParentState({ section_id })}
-        >
-          {this._renderSections()}
-        </Picker>
+        <View style={styles.fieldContainer}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>Select Section</Text>
+          </View>
+          <View style={styles.inputWrapper}>
+            <SectionPicker
+              section_id={section_id}
+              onValueChange={section_id => setParentState({ section_id })}
+            />
+          </View>
+        </View>
 
-        <DatePicker
-          date={date_added}
-          style={styles.DatePicker}
-          customStyles={CustomStyles}
-          format="YYYY-MM-DD"
-          mode="date"
-          minDate={new Date(2018, 1, 1)}
-          maxDate={new Date(2025, 12, 31)}
-          androidMode={'spinner'}
-          placeholder="Select Date"
-          onDateChange={date_added => setParentState({ date_added })}
+        <View style={styles.fieldContainer}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>Select Date</Text>
+          </View>
+          <View style={styles.inputWrapper}>
+            <DatePickerItem
+              date_added={date_added}
+              onDateChange={date_added => setParentState({ date_added })}
+            />
+          </View>
+        </View>
+
+        <FavoriteBox
+          isFavorite={isFavorite}
+          onIconPress={() => setParentState({ isFavorite: !isFavorite })}
         />
-      </Form>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  DatePicker: {
-    width: 200,
-    marginLeft: 10
+  text: {
+    color: greyscale.darkAccent,
+    paddingVertical: 15,
+    fontSize: 15
+  },
+  fieldContainer: {
+    flexDirection: 'column',
+    borderTopColor: 'transparent',
+    borderBottomColor: greyscale.lightAccent,
+    height: 90,
+    paddingHorizontal: 25
+  },
+  form: {
+    flex: 1
+  },
+  textWrapper: {
+    flex: 1
+  },
+  inputWrapper: {
+    flex: 5,
+    paddingVertical: 30
   }
 });
-
-const CustomStyles = {
-  dateIcon: {
-    display: 'none'
-  },
-  dateInput: {
-    borderColor: 'transparent',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
-  },
-  dateText: {
-    color: greyscale.darkAccent
-  }
-};

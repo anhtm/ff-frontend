@@ -38,15 +38,12 @@ export default class CustomInput extends Component {
 
 const styles = StyleSheet.create({
   input: {
-    color: greyscale.lightAccent,
-    // opacity: 0.6,
-    paddingLeft: 20
+    color: greyscale.darkAccent
   },
   inputContainer: {
-    backgroundColor: greyscale.darkShade,
-    borderRadius: 20
-  },
-  field: {
-    marginBottom: 10
+    backgroundColor: greyscale.lightShade,
+    borderRadius: 5,
+    borderBottomColor: greyscale.darkAccent,
+    width: '100%'
   }
 });

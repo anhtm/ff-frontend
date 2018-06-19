@@ -7,11 +7,16 @@ import { sendDataWithToken } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import { getToken } from '../authentication/auth';
+import FavoriteBox from '../components/FavoriteBox';
 
 export default class AddItem extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: `Adding ${navigation.getParam('item', 'no-item').name}`
+      // headerRight: // (<FavoriteBox
+      //   isFavorite={this.state.isFavorite}
+      //   setParentState={(newState = null) => this.setState(newState)}
+      // />)
     };
   };
 
@@ -21,7 +26,8 @@ export default class AddItem extends Component {
       section_id: 1,
       date_added: new Date(),
       name: this.props.navigation.getParam('item', '').name,
-      error: null
+      error: null,
+      isFavorite: false
     };
   }
 
@@ -55,10 +61,11 @@ export default class AddItem extends Component {
     return (
       <View style={styles.container}>
         <AddItemForm
-          setParentState={newState => this.setState(newState)}
+          setParentState={(newState = null) => this.setState(newState)}
           section_id={this.state.section_id}
           date_added={this.state.date_added}
           name={this.state.name}
+          isFavorite={this.state.isFavorite}
         />
         <Button title="Add Item" onPress={this._onSubmit} />
       </View>

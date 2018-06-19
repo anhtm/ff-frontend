@@ -1,6 +1,7 @@
 export const colors = {
   lightShade: '#E5DDD6',
   lightAccent: '#C28A6B',
+  // main: red for favorite heart
   main: '#D23B30',
   darkAccent: '#8E6890',
   darkShade: '#321619',
