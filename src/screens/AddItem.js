@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AddItemForm from '../components/AddItemForm';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import AddItemForm from '../components/add-item-form/index';
 import { greyscale } from '../styles/colors';
-import { Button } from 'react-native-elements';
+import { Button, Overlay } from 'react-native-elements';
 import { sendDataWithToken } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import { getToken } from '../authentication/auth';
-import FavoriteBox from '../components/FavoriteBox';
+import { toCapital } from '../helpers/toCapital';
 
 export default class AddItem extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -27,17 +27,19 @@ export default class AddItem extends Component {
       date_added: new Date(),
       name: this.props.navigation.getParam('item', '').name,
       error: null,
-      isFavorite: false
+      isFavorite: false,
+      isSuccess: true
     };
   }
 
   _onSubmit = () => {
-    const { name, section_id, date_added } = this.state;
+    const { name, section_id, date_added, isFavorite } = this.state;
     let info = {
       name,
       section_id,
       date_added,
-      food_id: this.props.navigation.getParam('item', '').id
+      food_id: this.props.navigation.getParam('item', '').id,
+      isFavorite
     };
 
     console.log(info);
@@ -47,8 +49,13 @@ export default class AddItem extends Component {
         .then(res => {
           return res.json();
         })
-        .then(json => {
-          console.log(json);
+        .then(result => {
+          console.log(result);
+          this.showAlert(
+            'A new item has been created',
+            toCapital(result.name),
+            'OK'
+          );
         })
         .catch(error => {
           this.setState({ error });
@@ -56,16 +63,31 @@ export default class AddItem extends Component {
     });
   };
 
+  showAlert = (title, msg, action = 'OK') => {
+    Alert.alert(
+      title,
+      msg,
+      [
+        {
+          text: action,
+          onPress: () => this.props.navigation.navigate('Search')
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
   render() {
     console.log(this.state);
+    const { section_id, date_added, name, isFavorite } = this.state;
     return (
       <View style={styles.container}>
         <AddItemForm
           setParentState={(newState = null) => this.setState(newState)}
-          section_id={this.state.section_id}
-          date_added={this.state.date_added}
-          name={this.state.name}
-          isFavorite={this.state.isFavorite}
+          section_id={section_id}
+          date_added={date_added}
+          name={name}
+          isFavorite={isFavorite}
         />
         <Button title="Add Item" onPress={this._onSubmit} />
       </View>

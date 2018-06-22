@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { greyscale } from '../styles/colors';
+import { greyscale } from '../../../styles/colors';
 import DatePicker from 'react-native-datepicker';
 
 export default class DatePickerItem extends Component {

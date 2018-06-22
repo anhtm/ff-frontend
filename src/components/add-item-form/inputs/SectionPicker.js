@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Picker } from 'native-base';
-import { sections } from '../config/data';
-import { greyscale } from '../styles/colors';
+import { sections } from '../../../config/data';
+import { greyscale } from '../../../styles/colors';
 
 export default class SectionPicker extends Component {
   _renderSections = () => {
