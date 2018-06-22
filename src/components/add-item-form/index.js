@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { greyscale, colors } from '../styles/colors';
-import CustomInput from '../components/CustomTextInput';
-import FavoriteBox from '../components/FavoriteBox';
-import SectionPicker from '../components/SectionPicker';
-import DatePickerItem from '../components/DatePickerItem';
+import { greyscale, colors } from '../../styles/colors';
+import CustomInput from '../CustomTextInput';
+import FavoriteBox from './inputs/FavoriteBox';
+import SectionPicker from './inputs/SectionPicker';
+import DatePickerItem from './inputs/DatePickerItem';
 
 export default class AddItemForm extends Component {
   render() {
