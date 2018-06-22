@@ -1,56 +1,49 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { items } from '../config/data';
-import _ from 'lodash';
-import { dataset } from '../config/urls';
 import 'whatwg-fetch';
-import InfoCard from '../components/InfoCard';
+import { StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
+import ItemInfoDetails from '../components/ItemInfoDetails';
+import { toCapital } from '../helpers/toCapital';
+import { backend } from '../config/urls';
+import { getDataWithToken } from '../authentication/requests';
+import { getToken } from '../authentication/auth';
+import { getFoodItem } from '../helpers/fetchDataset';
+import { greyscale } from '../styles/colors';
 
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('name', 'NO-NAME')
+      title: toCapital(navigation.getParam('item', 'no-item').name)
     };
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      items: items,
-      item: {},
-      food_info: {}
+      item: this.props.navigation.getParam('item', 'no-item'),
+      food_info: {},
+      error: null
     };
   }
 
   componentDidMount() {
-    const item_id = this.props.navigation.getParam('id', 'NO-ID');
-    const item_index = _.findIndex(this.state.items, { id: item_id });
-    this.setState({ item: this.state.items[item_index] });
-    return fetch(
-      dataset +
-        'product?id=' +
-        this.props.navigation.getParam('food_id', 'NO-FoodId')
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(resData => {
-        this.setState({ food_info: resData });
-      })
-      .catch(err => {
-        throw err;
-      });
+    this.getFoodInfo();
   }
+
+  getFoodInfo = () => {
+    const food_id = this.state.item.food_id;
+    getFoodItem(food_id)
+      .then(item => {
+        this.setState({ food_info: item });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <InfoCard
-          title="General Info"
-          name={this.state.item.name}
-          section={this.state.item.section_id}
-          dateAdded={this.state.item.createdAt}
-        />
+        <ItemInfoDetails item={this.state.item} />
       </View>
     );
   }
@@ -59,6 +52,25 @@ export default class ItemInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: greyscale.lightShade
   }
 });
+
+/*
+fetchItemDetails = () => {
+  const item_id = this.props.navigation.getParam('id', 'NO-ID');
+  const path = `${backend}item/${item_id}`;
+  getToken().then(token => {
+    fetch(path, getDataWithToken(token))
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.setState({ item: json });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  });
+};
+*/

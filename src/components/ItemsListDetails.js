@@ -1,39 +1,37 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { sections } from '../config/data';
-import { ListItem } from 'react-native-elements';
-import SectionItem from '../components/SectionItem';
+import SectionItem from './SectionItem';
+import { toCapital } from '../helpers/toCapital';
+import CustomButton from './CustomButton';
 import { greyscale } from '../styles/colors';
 
-export default class SectionsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { sections: sections };
-  }
-
-  _keyExtractor = (item, index) => index.toString();
-
+export default class ItemsListDetails extends Component {
   _renderItem = ({ item }) => (
     <SectionItem
-      name={item.name}
-      icon={item.icon}
-      iconStyle={item.style}
+      name={toCapital(item.name)}
       onPress={() =>
-        this.props.navigation.navigate('ItemsList', {
-          section_id: item.id,
-          section_name: item.name
+        this.props.navigation.navigate('ItemInfo', {
+          item
         })
       }
     />
   );
 
+  _keyExtractor = (item, index) => index.toString();
+
   render() {
+    console.log(this.props.data);
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.sections}
+          data={this.props.data}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
+        />
+        <CustomButton
+          iconName="cake"
+          iconStyle="entypo"
+          onPress={() => this.props.navigation.navigate('Search')}
         />
       </View>
     );

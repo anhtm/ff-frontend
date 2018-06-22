@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { items } from '../config/data';
+import { greyscale } from '../styles/colors';
 
 export default class SectionItem extends Component {
   render() {
+    const { onPress, icon, iconStyle, name, subtitle } = this.props;
+
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.rowContainer}>
-          <Icon
-            style={styles.thumbnail}
-            name={this.props.icon}
-            type={this.props.iconStyle}
-          />
+          <Icon name={icon} type={iconStyle} color={greyscale.lightShade} />
           <View style={styles.rowText}>
-            <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
-              {this.props.name}
+            <Text style={styles.title} ellipsizeMode={'tail'}>
+              {name}
+            </Text>
+            <Text style={styles.text} ellipsizeMode={'tail'}>
+              {subtitle}
             </Text>
           </View>
         </View>
@@ -27,38 +29,28 @@ export default class SectionItem extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
+    backgroundColor: greyscale.darkShade,
     height: 75,
     padding: 10,
     marginRight: 10,
     marginLeft: 10,
     marginTop: 10,
-    borderRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#CCC',
-    shadowOpacity: 1.0,
-    shadowRadius: 1
+    borderRadius: 5
   },
   title: {
     paddingLeft: 10,
     paddingTop: 15,
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#777'
+    color: greyscale.lightShade
   },
   text: {
     paddingLeft: 10,
     marginTop: 5,
     fontSize: 14,
-    color: '#777'
-  },
-  thumbnail: {
-    flex: 1,
-    height: undefined,
-    width: undefined
+    color: greyscale.lightAccent
   },
   rowText: {
-    flex: 4,
     flexDirection: 'column'
   }
 });

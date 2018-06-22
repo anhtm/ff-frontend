@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { items } from '../config/data';
-import SectionItem from '../components/SectionItem';
+import { StyleSheet, Text, View } from 'react-native';
+import 'whatwg-fetch';
+import { backend } from '../config/urls';
+import { getDataWithToken } from '../authentication/requests';
+import { getToken } from '../authentication/auth';
+import ItemsListDetails from '../components/ItemsListDetails';
 
 export default class ItemsList extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -13,56 +16,42 @@ export default class ItemsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TODO: selectedItems will be replaced by query to backen
-      items: items,
-      selectedItems: []
+      items: [],
+      error: null
     };
   }
 
-  _renderItem = ({ item }) => (
-    <SectionItem
-      name={item.name}
-      onPress={() =>
-        this.props.navigation.navigate('ItemInfo', {
-          id: item.id,
-          food_id: item.food_id,
-          name: item.name
+  fetchItems = () => {
+    const section_id = this.props.navigation.getParam('section_id', 'NO-ID');
+    const path = `${backend}items/section/${section_id}`;
+    getToken().then(token => {
+      fetch(path, getDataWithToken(token))
+        .then(res => {
+          return res.json();
         })
-      }
-    />
-  );
-
-  _keyExtractor = (item, index) => index.toString();
+        .then(json => {
+          this.setState({ items: json });
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+    });
+  };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const chosen_id = navigation.getParam('section_id', 'NO-ID');
-    var sectionItems = [];
-    const allItems = this.state.items;
-    for (var i = 0; i < allItems.length; i++) {
-      if (allItems[i].section_id == chosen_id) {
-        sectionItems.push(allItems[i]);
-      }
-    }
-    this.setState({ selectedItems: sectionItems });
+    this.fetchItems();
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.selectedItems}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
+    if (!this.state.error) {
+      return (
+        <ItemsListDetails
+          navigation={this.props.navigation}
+          data={this.state.items}
         />
-      </View>
-    );
+      );
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
-  }
-});
+const styles = StyleSheet.create({});
