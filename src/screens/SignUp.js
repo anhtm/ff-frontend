@@ -9,6 +9,8 @@ import AuthForm from '../components/AuthForm';
 import validate from 'validate.js';
 import { constraints } from '../helpers/validation';
 import { greyscale } from '../styles/colors';
+import Logo from '../components/Logo';
+import RoundButton from '../components/RoundButton';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -72,6 +74,7 @@ export default class SignUp extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <Logo />
         <AuthForm
           first_name={this.state.first_name}
           last_name={this.state.last_name}
@@ -83,12 +86,7 @@ export default class SignUp extends Component {
           msgConfirmPw={this.state.error.msgConfirmPw}
         />
 
-        <Button
-          buttonStyle={{ marginTop: 20 }}
-          backgroundColor={greyscale.main}
-          title="SIGN UP"
-          onPress={this._onSubmit}
-        />
+        <RoundButton title="Sign Up" onPress={this._onSubmit} />
         <Button
           buttonStyle={{ marginTop: 20 }}
           backgroundColor="transparent"

@@ -19,10 +19,18 @@ export default class CustomInput extends Component {
       placeholder,
       onChange,
       secureTextEntry,
-      message
+      message,
+      iconName,
+      iconType
     } = this.props;
     return (
       <View style={styles.field}>
+        <Icon
+          name={iconName}
+          type={iconType}
+          color={greyscale.darkAccent}
+          size={20}
+        />
         <FormInput
           containerStyle={styles.inputContainer}
           inputStyle={styles.input}
@@ -37,6 +45,10 @@ export default class CustomInput extends Component {
 }
 
 const styles = StyleSheet.create({
+  field: {
+    flexDirection: 'row',
+    marginLeft: 20
+  },
   input: {
     color: greyscale.darkAccent
   },
@@ -44,6 +56,6 @@ const styles = StyleSheet.create({
     backgroundColor: greyscale.lightShade,
     borderRadius: 5,
     borderBottomColor: greyscale.darkAccent,
-    width: '100%'
+    flex: 1
   }
 });

@@ -7,6 +7,8 @@ import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import AuthForm from '../components/AuthForm';
 import { greyscale } from '../styles/colors';
+import Logo from '../components/Logo';
+import RoundButton from '../components/RoundButton';
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -58,6 +60,7 @@ export default class SignIn extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Logo />
         <AuthForm
           isSignIn={true}
           email={this.state.email}
@@ -65,12 +68,7 @@ export default class SignIn extends Component {
           setParentState={newState => this.setState(newState)}
         />
 
-        <Button
-          buttonStyle={{ marginTop: 20 }}
-          backgroundColor={greyscale.main}
-          title="SIGN IN"
-          onPress={this._onSubmit}
-        />
+        <RoundButton title="Sign In" onPress={this._onSubmit} />
         <Button
           buttonStyle={{ marginTop: 20 }}
           backgroundColor="transparent"

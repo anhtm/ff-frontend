@@ -18,6 +18,7 @@ import ItemInfo from './src/screens/ItemInfo';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import AddItem from './src/screens/AddItem';
+import Start from './src/screens/Start';
 
 let screen = Dimensions.get('window');
 
@@ -52,16 +53,22 @@ export const SectionStack = createStackNavigator({
 });
 
 export const SignedOutLayout = createStackNavigator({
+  Start: {
+    screen: Start,
+    navigationOptions: {
+      header: null
+    }
+  },
   SignUp: {
     screen: SignUp,
     navigationOptions: {
-      title: 'Sign Up'
+      header: null
     }
   },
   SignIn: {
     screen: SignIn,
     navigationOptions: {
-      title: 'Sign In'
+      header: null
     }
   }
 });
