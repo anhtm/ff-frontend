@@ -20,3 +20,5 @@ adb.0.log
 .watchmanconfig
 
 /metro-cache-*
+
+yarn.lock
