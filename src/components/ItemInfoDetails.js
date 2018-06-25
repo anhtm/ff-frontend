@@ -4,18 +4,26 @@ import { Card, Divider } from 'react-native-elements';
 import { greyscale } from '../styles/colors';
 
 export default class ItemInfoDetails extends Component {
+  renderFavorite(item) {
+    if (item.isFavorite) {
+      return 'is favorite';
+    } else {
+      return 'is not favorite';
+    }
+  }
+
   render() {
-    const { item } = this.props;
+    const { item, food_info } = this.props;
     return (
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
           <Text style={styles.title} ellipsizeMode={'tail'}>
-            {item.name}
+            Name: {item.name}
           </Text>
-          <Text style={styles.text} ellipsizeMode={'tail'}>
-            Section: {item.section_id}
-            food_id: {item.food_id}
+          <Text style={styles.text}>
+            Preference: {this.renderFavorite(item)}
           </Text>
+          <Text style={styles.text}>Date Added: {item.date_added}</Text>
         </View>
       </View>
     );

@@ -41,9 +41,13 @@ export default class ItemInfo extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
-        <ItemInfoDetails item={this.state.item} />
+        <ItemInfoDetails
+          item={this.state.item}
+          food_info={this.state.food_info}
+        />
       </View>
     );
   }
@@ -55,22 +59,3 @@ const styles = StyleSheet.create({
     backgroundColor: greyscale.lightShade
   }
 });
-
-/*
-fetchItemDetails = () => {
-  const item_id = this.props.navigation.getParam('id', 'NO-ID');
-  const path = `${backend}item/${item_id}`;
-  getToken().then(token => {
-    fetch(path, getDataWithToken(token))
-      .then(res => {
-        return res.json();
-      })
-      .then(json => {
-        this.setState({ item: json });
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-  });
-};
-*/

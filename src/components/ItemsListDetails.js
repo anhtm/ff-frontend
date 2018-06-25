@@ -6,9 +6,18 @@ import CustomButton from './CustomButton';
 import { greyscale } from '../styles/colors';
 
 export default class ItemsListDetails extends Component {
+  renderExpiryStatus(item) {
+    if (item.expired) {
+      return 'Expired';
+    } else {
+      return 'Not expired';
+    }
+  }
+
   _renderItem = ({ item }) => (
     <SectionItem
       name={toCapital(item.name)}
+      subtitle={this.renderExpiryStatus(item)}
       onPress={() =>
         this.props.navigation.navigate('ItemInfo', {
           item
