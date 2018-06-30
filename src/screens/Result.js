@@ -38,6 +38,7 @@ export default class Result extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
         <FoodInfoDetails
