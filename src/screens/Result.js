@@ -5,7 +5,7 @@ import { getFoodItem, categories } from '../helpers/fetchDataset';
 import SectionItem from '../components/SectionItem';
 import FoodInfoDetails from '../components/FoodInfoDetails';
 import { greyscale } from '../styles/colors';
-
+import { formatDataIntoLabels } from '../helpers/metrics';
 import _ from 'lodash';
 
 export default class Result extends Component {
@@ -21,11 +21,13 @@ export default class Result extends Component {
       isLoading: false,
       item: this.props.navigation.getParam('item', 'no-item'),
       error: null,
-      category: {}
+      category: {},
+      expiry_info: {}
     };
   }
 
   componentDidMount() {
+    this.setState({ expiry_info: formatDataIntoLabels(this.state.item) });
     this.getItemCategory();
   }
 
@@ -38,12 +40,12 @@ export default class Result extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <FoodInfoDetails
           item={this.state.item}
           category={this.state.category}
+          expiry_info={this.state.expiry_info}
         />
         <Button
           iconRight={{ name: 'cake', type: 'entypo' }}
@@ -51,7 +53,8 @@ export default class Result extends Component {
           backgroundColor={greyscale.main}
           onPress={() => {
             this.props.navigation.navigate('AddItem', {
-              item: this.state.item
+              item: this.state.item,
+              expiry_info: this.state.expiry_info
             });
           }}
         />

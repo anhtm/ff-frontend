@@ -29,7 +29,7 @@ const metrics = [
   ]
 ];
 
-const titles = {
+export const titles = {
   dop_pantry: 'In pantry after date of purchase',
   pantry: 'In pantry',
   dop_freeze: 'In freezer after date of purchase',
@@ -45,10 +45,10 @@ const titles = {
 };
 
 const metricValid = (item, metricKey) => {
-  return _.includes(Object.keys(item), metricKey);
+  return _.includes(_.keys(item), metricKey);
 };
 
-const getSections = item => {
+export const getSections = item => {
   let metricArray = [];
   for (var i = 0; i < metrics.length; i++) {
     if (metricValid(item, metrics[i][0])) {
@@ -58,7 +58,7 @@ const getSections = item => {
   return metricArray;
 };
 
-const humanizeData = data_obj => {
+export const humanizeData = data_obj => {
   const { metric, min, max, tips } = data_obj;
   if (min === max) {
     return `${min} ${metric}`;
@@ -71,7 +71,7 @@ const humanizeData = data_obj => {
   }
 };
 
-const formatDataIntoLabels = item => {
+export const formatDataIntoLabels = item => {
   let merged = {};
   let result = getSections(item);
   for (var i = 0; i < result.length; i++) {

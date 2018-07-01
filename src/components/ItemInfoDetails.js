@@ -28,13 +28,13 @@ export default class ItemInfoDetails extends Component {
       if (isExpired(moment)) {
         return (
           <Text style={styles.text}>
-            {key} - {titles.status.expired}: {moment}
+            {titles.status.expired}: {moment}
           </Text>
         );
       } else {
         return (
           <Text style={styles.text}>
-            {key} - {titles.status.expires}: {moment}
+            {titles.status.expires}: {moment}
           </Text>
         );
       }
@@ -43,7 +43,6 @@ export default class ItemInfoDetails extends Component {
 
   render() {
     const { item, food_info } = this.props;
-    this.renderExpiryStatus(item, food_info);
     return (
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
@@ -54,6 +53,7 @@ export default class ItemInfoDetails extends Component {
             Preference: {this.renderFavorite(item)}
           </Text>
           <Text style={styles.text}>Date Added: {item.date_added}</Text>
+          {this.renderExpiryStatus(item, food_info)}
         </View>
       </View>
     );

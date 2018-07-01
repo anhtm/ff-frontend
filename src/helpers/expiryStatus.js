@@ -2,7 +2,7 @@ const moment = require('moment');
 const _ = require('lodash');
 const { formatDataIntoLabels } = require('../helpers/metrics');
 
-const sections = [
+export const sections = [
   {
     id: 1,
     name: 'refrigerate'
@@ -16,6 +16,35 @@ const sections = [
     name: 'pantry'
   }
 ];
+
+const food_info = {
+  category_id: 7,
+  dop_refrigerate_max: 3,
+  dop_refrigerate_metric: 'weeks',
+  dop_refrigerate_min: 3,
+  id: 8,
+  keywords: 'coffee creamer,coffee, creamer,liquid refrigerated',
+  name: 'coffee creamer',
+  name_subtitle: 'liquid refrigerated',
+  refrigerate_after_opening_max: 1,
+  refrigerate_after_opening_metric: 'weeks',
+  refrigerate_after_opening_min: 1,
+  dop_freeze_max: 9,
+  dop_freeze_metric: 'months',
+  dop_freeze_min: 6
+};
+
+const item = {
+  date_added: '2018-06-25',
+  done: false,
+  expired: false,
+  food_id: 8,
+  id: 15,
+  isFavorite: false,
+  name: 'coffee creamer',
+  section_id: 1,
+  user_id: 1
+};
 
 const getCurrentSection = (item, food_info) => {
   const formatted_food_info = formatDataIntoLabels(food_info);
@@ -48,39 +77,9 @@ const isExpired = moment => {
   }
 };
 
-console.log(getCurrentSection(item, food_info));
-
 module.exports = {
   displayMoment,
   isExpired,
-  getCurrentSection
-};
-
-const food_info = {
-  category_id: 7,
-  dop_refrigerate_max: 3,
-  dop_refrigerate_metric: 'weeks',
-  dop_refrigerate_min: 3,
-  id: 8,
-  keywords: 'coffee creamer,coffee, creamer,liquid refrigerated',
-  name: 'coffee creamer',
-  name_subtitle: 'liquid refrigerated',
-  refrigerate_after_opening_max: 1,
-  refrigerate_after_opening_metric: 'weeks',
-  refrigerate_after_opening_min: 1,
-  dop_freeze_max: 9,
-  dop_freeze_metric: 'months',
-  dop_freeze_min: 6
-};
-
-const item = {
-  date_added: '2018-06-25',
-  done: false,
-  expired: false,
-  food_id: 8,
-  id: 15,
-  isFavorite: false,
-  name: 'coffee creamer',
-  section_id: 1,
-  user_id: 1
+  getCurrentSection,
+  sections
 };

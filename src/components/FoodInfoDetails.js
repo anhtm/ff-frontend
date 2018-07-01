@@ -11,20 +11,18 @@ import _ from 'lodash';
 
 export default class InfoDetails extends Component {
   render() {
-    const { category, item } = this.props;
-    const results = formatDataIntoLabels(item);
-    console.log('results', results);
+    const { category, item, expiry_info } = this.props;
     return (
       <ScrollView>
         <View>
           <Text style={styles.title}>Category</Text>
           <Text style={styles.text}>{category.category_name}</Text>
         </View>
-        {Object.keys(results).map((key, i) => {
+        {Object.keys(expiry_info).map((key, i) => {
           return (
             <View key={i}>
               <Text style={styles.title}>{titles[key]}</Text>
-              <Text style={styles.text}>{humanizeData(results[key])}</Text>
+              <Text style={styles.text}>{humanizeData(expiry_info[key])}</Text>
             </View>
           );
         })}
