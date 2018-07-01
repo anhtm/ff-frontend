@@ -29,7 +29,7 @@ export default class SectionItem extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: greyscale.darkShade,
+    backgroundColor: greyscale.main,
     height: 75,
     padding: 10,
     marginRight: 10,
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: 10,
-    marginTop: 5,
+    marginTop: 15,
     fontSize: 14,
     color: greyscale.lightAccent
   },
   rowText: {
-    flexDirection: 'column'
+    flexDirection: 'row'
   }
 });

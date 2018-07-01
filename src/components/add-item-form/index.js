@@ -13,7 +13,8 @@ export default class AddItemForm extends Component {
       section_id,
       date_added,
       name,
-      isFavorite
+      isFavorite,
+      expiry_info
     } = this.props;
 
     return (
@@ -39,6 +40,7 @@ export default class AddItemForm extends Component {
             <SectionPicker
               section_id={section_id}
               onValueChange={section_id => setParentState({ section_id })}
+              expiry_info={expiry_info}
             />
           </View>
         </View>

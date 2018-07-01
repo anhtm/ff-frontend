@@ -28,7 +28,8 @@ export default class AddItem extends Component {
       name: this.props.navigation.getParam('item', '').name,
       error: null,
       isFavorite: false,
-      isSuccess: true
+      isSuccess: true,
+      expiry_info: this.props.navigation.getParam('expiry_info', '')
     };
   }
 
@@ -79,7 +80,13 @@ export default class AddItem extends Component {
 
   render() {
     console.log(this.state);
-    const { section_id, date_added, name, isFavorite } = this.state;
+    const {
+      section_id,
+      date_added,
+      name,
+      isFavorite,
+      expiry_info
+    } = this.state;
     return (
       <View style={styles.container}>
         <AddItemForm
@@ -88,6 +95,7 @@ export default class AddItem extends Component {
           date_added={date_added}
           name={name}
           isFavorite={isFavorite}
+          expiry_info={expiry_info}
         />
         <Button title="Add Item" onPress={this._onSubmit} />
       </View>
