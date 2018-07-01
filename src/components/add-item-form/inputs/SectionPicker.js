@@ -21,7 +21,9 @@ export default class SectionPicker extends Component {
   };
 
   _renderSections = () => {
-    const result = this.getAvailableSections();
+    // const result = this.getAvailableSections();
+    // console.log('result', result);
+    const { result } = this.props;
     return result.map(section => (
       <Picker.Item key={section.id} label={section.name} value={section.id} />
     ));

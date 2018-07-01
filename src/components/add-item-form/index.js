@@ -14,7 +14,8 @@ export default class AddItemForm extends Component {
       date_added,
       name,
       isFavorite,
-      expiry_info
+      expiry_info,
+      result
     } = this.props;
 
     return (
@@ -41,6 +42,7 @@ export default class AddItemForm extends Component {
               section_id={section_id}
               onValueChange={section_id => setParentState({ section_id })}
               expiry_info={expiry_info}
+              result={result}
             />
           </View>
         </View>
