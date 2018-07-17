@@ -9,6 +9,7 @@ import { backend } from '../config/urls';
 import { getToken } from '../authentication/auth';
 import { toCapital } from '../helpers/toCapital';
 import { sections } from '../helpers/expiryStatus';
+import { alert } from '../helpers/alerts';
 import _ from 'lodash';
 
 export default class AddItem extends Component {
@@ -55,29 +56,16 @@ export default class AddItem extends Component {
         })
         .then(result => {
           console.log(result);
-          this.showAlert('A new item has been created', toCapital(result.name));
+          alert('A new item has been created', toCapital(result.name));
+          this.props.navigation.navigate('Search');
         })
         .catch(error => {
           this.setState(
             { error },
-            this.showAlert('There is an error', this.state.error)
+            alert('There is an error', this.state.error)
           );
         });
     });
-  };
-
-  showAlert = (title, msg, action = 'OK') => {
-    Alert.alert(
-      title,
-      msg,
-      [
-        {
-          text: action,
-          onPress: () => this.props.navigation.navigate('Search')
-        }
-      ],
-      { cancelable: false }
-    );
   };
 
   getAvailableSections = () => {
@@ -104,9 +92,6 @@ export default class AddItem extends Component {
   }
 
   render() {
-    console.log(this.state);
-    // TODO: fix bug undefined is not an object
-    console.log('values', _.values(this.state.result[0])[0]);
     const {
       section_id,
       date_added,

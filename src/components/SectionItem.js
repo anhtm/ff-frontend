@@ -29,13 +29,13 @@ export default class SectionItem extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: greyscale.main,
     height: 75,
     padding: 10,
     marginRight: 10,
     marginLeft: 10,
     marginTop: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor: greyscale.main
   },
   title: {
     paddingLeft: 10,

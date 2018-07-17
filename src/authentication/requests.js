@@ -26,6 +26,18 @@ export const getDataWithToken = token => {
   };
 };
 
+export const deleteDataWithToken = token => {
+  return {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'x-auth': token
+    },
+    mode: 'cors'
+  };
+};
+
 export const sendDataWithToken = (info, token) => {
   return {
     method: 'POST',

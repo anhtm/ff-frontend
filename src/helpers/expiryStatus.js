@@ -46,6 +46,8 @@ const item = {
   user_id: 1
 };
 
+/* This function determines relevant expiry information regarding the section in
+which item is added to. */
 const getCurrentSection = (item, food_info) => {
   const formatted_food_info = formatDataIntoLabels(food_info);
   let result = {};
