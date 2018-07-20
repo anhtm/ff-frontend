@@ -7,6 +7,7 @@ import FoodInfoDetails from '../components/FoodInfoDetails';
 import { greyscale } from '../styles/colors';
 import { formatDataIntoLabels } from '../helpers/metrics';
 import _ from 'lodash';
+import RoundButton from '../components/RoundButton';
 
 export default class Result extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -47,10 +48,9 @@ export default class Result extends Component {
           category={this.state.category}
           expiry_info={this.state.expiry_info}
         />
-        <Button
+        <RoundButton
           iconRight={{ name: 'cake', type: 'entypo' }}
           title="Add to Inventory"
-          backgroundColor={greyscale.main}
           onPress={() => {
             this.props.navigation.navigate('AddItem', {
               item: this.state.item,

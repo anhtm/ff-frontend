@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { greyscale, colors } from '../../styles/colors';
 import CustomInput from '../CustomTextInput';
 import FavoriteBox from './inputs/FavoriteBox';
@@ -22,9 +23,12 @@ export default class AddItemForm extends Component {
       <View style={styles.form}>
         <View style={styles.fieldContainer}>
           <View style={styles.textWrapper}>
-            <Text style={styles.text}>New Item</Text>
-          </View>
-          <View style={styles.inputWrapper}>
+            <Icon
+              iconStyle={styles.icon}
+              name="food"
+              type="material-community"
+              size={20}
+            />
             <CustomInput
               label={name}
               placeholder="ie: Frozen bananas"
@@ -33,36 +37,50 @@ export default class AddItemForm extends Component {
           </View>
         </View>
 
-        <View style={styles.fieldContainer}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.text}>Select Section</Text>
+        <View style={styles.row}>
+          <View style={styles.fieldContainer}>
+            <View style={styles.textWrapper}>
+              <Icon
+                iconStyle={styles.icon}
+                name="archive"
+                type="entypo"
+                size={20}
+              />
+              <Text style={styles.text}>Section</Text>
+            </View>
+            <View style={styles.inputWrapper}>
+              <SectionPicker
+                section_id={section_id}
+                onValueChange={section_id => setParentState({ section_id })}
+                expiry_info={expiry_info}
+                result={result}
+              />
+            </View>
           </View>
-          <View style={styles.inputWrapper}>
-            <SectionPicker
-              section_id={section_id}
-              onValueChange={section_id => setParentState({ section_id })}
-              expiry_info={expiry_info}
-              result={result}
-            />
-          </View>
-        </View>
 
-        <View style={styles.fieldContainer}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.text}>Select Date</Text>
+          <View style={styles.fieldContainer}>
+            <View style={styles.textWrapper}>
+              <Icon
+                iconStyle={styles.icon}
+                name="stopwatch"
+                type="entypo"
+                size={20}
+              />
+              <Text style={styles.text}>Date</Text>
+            </View>
+            <View style={styles.inputWrapper}>
+              <DatePickerItem
+                date_added={date_added}
+                onDateChange={date_added => setParentState({ date_added })}
+              />
+            </View>
           </View>
-          <View style={styles.inputWrapper}>
-            <DatePickerItem
-              date_added={date_added}
-              onDateChange={date_added => setParentState({ date_added })}
-            />
-          </View>
-        </View>
 
-        <FavoriteBox
-          isFavorite={isFavorite}
-          onIconPress={() => setParentState({ isFavorite: !isFavorite })}
-        />
+          <FavoriteBox
+            isFavorite={isFavorite}
+            onIconPress={() => setParentState({ isFavorite: !isFavorite })}
+          />
+        </View>
       </View>
     );
   }
@@ -70,25 +88,23 @@ export default class AddItemForm extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    color: greyscale.darkAccent,
-    paddingVertical: 15,
-    fontSize: 15
-  },
-  fieldContainer: {
-    flexDirection: 'column',
-    borderTopColor: 'transparent',
-    borderBottomColor: greyscale.lightAccent,
-    height: 90,
-    paddingHorizontal: 25
-  },
-  form: {
     flex: 1
+  },
+  icon: {
+    paddingRight: 10
   },
   textWrapper: {
+    flexDirection: 'row'
+  },
+  fieldContainer: {
+    paddingVertical: 20
+  },
+  inputWrapper: {},
+  form: {
+    paddingHorizontal: 20,
     flex: 1
   },
-  inputWrapper: {
-    flex: 5,
-    paddingVertical: 30
+  row: {
+    flexDirection: 'row'
   }
 });

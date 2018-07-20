@@ -2,7 +2,6 @@ import 'whatwg-fetch';
 import { StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
 import ItemInfoDetails from '../components/ItemInfoDetails';
-import { toCapital } from '../helpers/toCapital';
 import { backend } from '../config/urls';
 import { deleteDataWithToken } from '../authentication/requests';
 import { getToken } from '../authentication/auth';
@@ -11,12 +10,13 @@ import { greyscale } from '../styles/colors';
 import CustomButton from '../components/CustomButton';
 import CustomTextInput from '../components/CustomTextInput';
 import { alert } from '../helpers/alerts';
+import _ from 'lodash';
 
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
     const { save } = navigation.state.params || {};
     return {
-      title: toCapital(navigation.getParam('item', 'no-item').name),
+      title: _.capitalize(navigation.getParam('item', 'no-item').name),
       headerRight:
         save === undefined ? null : (
           <CustomButton

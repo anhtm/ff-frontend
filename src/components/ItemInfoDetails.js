@@ -16,7 +16,6 @@ export default class ItemInfoDetails extends Component {
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
           <Favorite item={item} />
-          {DateAdded(item.date_added)}
           <ExpiryStatus item={item} food_info={food_info} />
         </View>
       </View>

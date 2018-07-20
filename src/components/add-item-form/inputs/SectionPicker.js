@@ -20,7 +20,7 @@ export default class SectionPicker extends Component {
       <Picker
         style={styles.Picker}
         iosHeader="Select one"
-        mode="dropdown"
+        mode="dialog"
         selectedValue={section_id}
         onValueChange={onValueChange}
       >
@@ -30,9 +30,12 @@ export default class SectionPicker extends Component {
   }
 }
 
+let width = 150;
 const styles = StyleSheet.create({
   Picker: {
     backgroundColor: greyscale.lightShade,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: greyscale.darkShade,
+    width: width
   }
 });

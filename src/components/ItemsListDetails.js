@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import SectionItem from './SectionItem';
-import { toCapital } from '../helpers/toCapital';
 import CustomButton from './CustomButton';
 import { greyscale } from '../styles/colors';
+import { ListItem } from 'react-native-elements';
+import _ from 'lodash';
 
 export default class ItemsListDetails extends Component {
   _renderItem = ({ item }) => (
-    <SectionItem
-      name={toCapital(item.name)}
+    <ListItem
+      title={_.capitalize(item.name)}
+      subtitle={'Added On: ' + item.date_added}
       onPress={() =>
         this.props.navigation.navigate('ItemInfo', {
           item
