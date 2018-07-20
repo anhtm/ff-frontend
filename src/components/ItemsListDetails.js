@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import SectionItem from './SectionItem';
-import { toCapital } from '../helpers/toCapital';
 import CustomButton from './CustomButton';
 import { greyscale } from '../styles/colors';
+import { ListItem } from 'react-native-elements';
+import _ from 'lodash';
 
 export default class ItemsListDetails extends Component {
-  renderExpiryStatus(item) {
-    if (item.expired) {
-      return 'Expired';
-    } else {
-      return 'Not expired';
-    }
-  }
-
   _renderItem = ({ item }) => (
-    <SectionItem
-      name={toCapital(item.name)}
-      subtitle={this.renderExpiryStatus(item)}
+    <ListItem
+      title={_.capitalize(item.name)}
+      subtitle={'Added On: ' + item.date_added}
       onPress={() =>
         this.props.navigation.navigate('ItemInfo', {
           item
@@ -36,11 +29,6 @@ export default class ItemsListDetails extends Component {
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
-        <CustomButton
-          iconName="cake"
-          iconStyle="entypo"
-          onPress={() => this.props.navigation.navigate('Search')}
-        />
       </View>
     );
   }
@@ -52,3 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: greyscale.lightShade
   }
 });
+
+/*
+<CustomButton
+  iconName="cake"
+  iconStyle="entypo"
+  onPress={() => this.props.navigation.navigate('Search')}
+/>
+*/

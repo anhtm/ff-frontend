@@ -9,10 +9,18 @@ export const colors = {
   greyInput: '#55555'
 };
 
+export const palette = {
+  main: '#AA442C',
+  lightAccent: '#A2A6A3',
+  lightShade: '#F1F2DA',
+  darkShade: '#211331',
+  darkAccent: '#ECAC59'
+};
+
 export const greyscale = {
-  main: '#777770',
+  main: '#31EAE7',
+  lightAccent: '#95B1AF',
   lightShade: '#FFFFFF',
-  lightAccent: '#BBBBB0',
-  darkShade: '#333330',
-  darkAccent: '#555550'
+  darkShade: '#324B4A',
+  darkAccent: '#000000'
 };

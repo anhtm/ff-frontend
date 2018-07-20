@@ -12,6 +12,7 @@ export default class RoundButton extends Component {
         title={title}
         buttonStyle={styles.button}
         backgroundColor={greyscale.main}
+        color={greyscale.darkAccent}
       />
     );
   }

@@ -2,17 +2,29 @@ import 'whatwg-fetch';
 import { StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
 import ItemInfoDetails from '../components/ItemInfoDetails';
-import { toCapital } from '../helpers/toCapital';
 import { backend } from '../config/urls';
-import { getDataWithToken } from '../authentication/requests';
+import { deleteDataWithToken } from '../authentication/requests';
 import { getToken } from '../authentication/auth';
 import { getFoodItem } from '../helpers/fetchDataset';
 import { greyscale } from '../styles/colors';
+import CustomButton from '../components/CustomButton';
+import CustomTextInput from '../components/CustomTextInput';
+import { alert } from '../helpers/alerts';
+import _ from 'lodash';
 
 export default class ItemInfo extends Component {
   static navigationOptions = ({ navigation }) => {
+    const { save } = navigation.state.params || {};
     return {
-      title: toCapital(navigation.getParam('item', 'no-item').name)
+      title: _.capitalize(navigation.getParam('item', 'no-item').name),
+      headerRight:
+        save === undefined ? null : (
+          <CustomButton
+            iconName={'trash-2'}
+            iconType={'feather'}
+            onPress={save}
+          />
+        )
     };
   };
 
@@ -25,9 +37,35 @@ export default class ItemInfo extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.navigation.setParams({ save: this._delete });
+  }
+
   componentDidMount() {
     this.getFoodInfo();
   }
+
+  _delete = () => {
+    let path = backend + 'item/' + this.state.item.id;
+    getToken().then(token => {
+      fetch(path, deleteDataWithToken(token))
+        .then(res => {
+          if (res.ok) {
+            return res;
+          }
+        })
+        .then(() => {
+          alert('Item has been deleted', null);
+          this.props.navigation.navigate('SectionsList');
+        })
+        .catch(error => {
+          this.setState(
+            { error },
+            alert('There is an error', this.state.error)
+          );
+        });
+    });
+  };
 
   getFoodInfo = () => {
     const food_id = this.state.item.food_id;

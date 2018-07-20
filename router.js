@@ -7,6 +7,7 @@ import {
   createSwitchNavigator
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+import { greyscale } from './src/styles/colors';
 
 import Home from './src/screens/Home';
 import Result from './src/screens/Result';
@@ -73,15 +74,20 @@ export const SignedOutLayout = createStackNavigator({
   }
 });
 
+const options = {
+  inactiveTintColor: greyscale.darkShade,
+  activeTintColor: greyscale.main
+};
 export const SignedInLayout = createBottomTabNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Favorites',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="check" type="entypo" size={28} color={tintColor} />
-        )
+          <Icon name="heart" type="entypo" size={28} color={tintColor} />
+        ),
+        tabBarOptions: options
       }
     },
     Search: {
@@ -90,7 +96,8 @@ export const SignedInLayout = createBottomTabNavigator(
         tabBarLabel: 'Search',
         tabBarIcon: ({ tintColor }) => (
           <Icon name="search" type="feather" size={28} color={tintColor} />
-        )
+        ),
+        tabBarOptions: options
       }
     },
     Setting: {
@@ -98,22 +105,24 @@ export const SignedInLayout = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Setting',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="settings" type="feather" size={28} color={tintColor} />
-        )
+          <Icon name="settings" size={28} color={tintColor} />
+        ),
+        tabBarOptions: options
       }
     },
     Section: {
       screen: SectionStack,
       navigationOptions: {
-        tabBarLabel: 'Inventory',
+        tabBarLabel: 'Kitchen',
         tabBarIcon: ({ tintColor }) => (
           <Icon
-            name="heart-box"
+            name="fridge-filled"
             type="material-community"
             size={28}
             color={tintColor}
           />
-        )
+        ),
+        tabBarOptions: options
       }
     }
   },

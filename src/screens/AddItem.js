@@ -2,23 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import AddItemForm from '../components/add-item-form/index';
 import { greyscale } from '../styles/colors';
-import { Button, Overlay } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { sendDataWithToken } from '../authentication/requests';
 import 'whatwg-fetch';
 import { backend } from '../config/urls';
 import { getToken } from '../authentication/auth';
-import { toCapital } from '../helpers/toCapital';
 import { sections } from '../helpers/expiryStatus';
+import { alert } from '../helpers/alerts';
 import _ from 'lodash';
+import RoundButton from '../components/RoundButton';
 
 export default class AddItem extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: `Adding ${navigation.getParam('item', 'no-item').name}`
-      // headerRight: // (<FavoriteBox
-      //   isFavorite={this.state.isFavorite}
-      //   setParentState={(newState = null) => this.setState(newState)}
-      // />)
     };
   };
 
@@ -30,7 +27,6 @@ export default class AddItem extends Component {
       name: this.props.navigation.getParam('item', '').name,
       error: null,
       isFavorite: false,
-      isSuccess: true,
       expiry_info: this.props.navigation.getParam('expiry_info', ''),
       result: []
     };
@@ -55,29 +51,16 @@ export default class AddItem extends Component {
         })
         .then(result => {
           console.log(result);
-          this.showAlert('A new item has been created', toCapital(result.name));
+          alert('A new item has been created', _.capitalize(result.name));
+          this.props.navigation.navigate('Search');
         })
         .catch(error => {
           this.setState(
             { error },
-            this.showAlert('There is an error', this.state.error)
+            alert('There is an error', this.state.error)
           );
         });
     });
-  };
-
-  showAlert = (title, msg, action = 'OK') => {
-    Alert.alert(
-      title,
-      msg,
-      [
-        {
-          text: action,
-          onPress: () => this.props.navigation.navigate('Search')
-        }
-      ],
-      { cancelable: false }
-    );
   };
 
   getAvailableSections = () => {
@@ -104,9 +87,6 @@ export default class AddItem extends Component {
   }
 
   render() {
-    console.log(this.state);
-    // TODO: fix bug undefined is not an object
-    console.log('values', _.values(this.state.result[0])[0]);
     const {
       section_id,
       date_added,
@@ -126,7 +106,7 @@ export default class AddItem extends Component {
           expiry_info={expiry_info}
           result={result}
         />
-        <Button title="Add Item" onPress={this._onSubmit} />
+        <RoundButton title="Add Item" onPress={this._onSubmit} />
       </View>
     );
   }
@@ -136,10 +116,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: greyscale.lightShade
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
   }
 });

@@ -26,12 +26,18 @@ const metrics = [
     'refrigerate_after_thawing_metric',
     'refrigerate_after_thawing_min',
     'refrigerate_after_thawing_max'
+  ],
+  [
+    'pantry_after_opening_metric',
+    'pantry_after_opening_min',
+    'pantry_after_opening_max'
   ]
 ];
 
 export const titles = {
   dop_pantry: 'In pantry after date of purchase',
   pantry: 'In pantry',
+  pantry_after_opening: 'In pantry after opening',
   dop_freeze: 'In freezer after date of purchase',
   freeze: 'In freezer',
   dop_refrigerate: 'In refrigerate after date of purchase',

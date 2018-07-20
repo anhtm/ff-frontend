@@ -10,6 +10,7 @@ export default class CustomSearchBar extends Component {
           round
           lightTheme
           showLoading
+          platform="android"
           clearIcon={{ size: 24, paddingRight: 10 }}
           cancelIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           searchIcon={{ size: 24 }}

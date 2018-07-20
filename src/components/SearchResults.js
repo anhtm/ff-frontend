@@ -11,7 +11,11 @@ export default class SearchResults extends Component {
       titleStyle={styles.title}
       subtitle={item.name_subtitle}
       subtitleStyle={styles.subtitle}
-      chevronColor={greyscale.lightAccent}
+      chevron={false}
+      chevronColor={greyscale.lightShade}
+      checkmark={false}
+      topDivider={false}
+      bottomDivider={false}
       onPress={() =>
         this.props.navigation.navigate('Result', {
           item: item
@@ -37,9 +41,9 @@ export default class SearchResults extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    color: greyscale.darkShade
+    color: greyscale.darkAccent
   },
   subtitle: {
-    color: greyscale.darkAccent
+    color: greyscale.darkShade
   }
 });

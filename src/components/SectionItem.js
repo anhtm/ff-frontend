@@ -11,7 +11,7 @@ export default class SectionItem extends Component {
     return (
       <TouchableOpacity onPress={onPress}>
         <View style={styles.rowContainer}>
-          <Icon name={icon} type={iconStyle} color={greyscale.lightShade} />
+          <Icon name={icon} type={iconStyle} color={greyscale.darkAccent} />
           <View style={styles.rowText}>
             <Text style={styles.title} ellipsizeMode={'tail'}>
               {name}
@@ -29,26 +29,26 @@ export default class SectionItem extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: greyscale.main,
     height: 75,
     padding: 10,
     marginRight: 10,
     marginLeft: 10,
     marginTop: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor: greyscale.lightShade
   },
   title: {
     paddingLeft: 10,
     paddingTop: 15,
     fontSize: 16,
     fontWeight: 'bold',
-    color: greyscale.lightShade
+    color: greyscale.darkAccent
   },
   text: {
     paddingLeft: 10,
     marginTop: 15,
     fontSize: 14,
-    color: greyscale.lightAccent
+    color: greyscale.darkAccent
   },
   rowText: {
     flexDirection: 'row'

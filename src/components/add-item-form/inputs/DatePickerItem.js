@@ -28,7 +28,8 @@ export default class DatePickerItem extends Component {
 
 const styles = StyleSheet.create({
   DatePicker: {
-    width: 200
+    width: 100,
+    marginTop: 10
   }
 });
 
@@ -45,6 +46,6 @@ const CustomStyles = {
   },
   dateText: {
     color: greyscale.darkAccent,
-    paddingLeft: 20
+    paddingLeft: 10
   }
 };

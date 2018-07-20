@@ -7,22 +7,7 @@ import { formatDataIntoLabels } from '../../../helpers/metrics';
 import _ from 'lodash';
 
 export default class SectionPicker extends Component {
-  getAvailableSections = () => {
-    const { expiry_info } = this.props;
-    const keys = _.keys(expiry_info);
-    let result = _.filter(sections, sec => {
-      for (var key of keys) {
-        if (key.includes(sec.name)) {
-          return sec;
-        }
-      }
-    });
-    return result;
-  };
-
   _renderSections = () => {
-    // const result = this.getAvailableSections();
-    // console.log('result', result);
     const { result } = this.props;
     return result.map(section => (
       <Picker.Item key={section.id} label={section.name} value={section.id} />
@@ -35,7 +20,7 @@ export default class SectionPicker extends Component {
       <Picker
         style={styles.Picker}
         iosHeader="Select one"
-        mode="dropdown"
+        mode="dialog"
         selectedValue={section_id}
         onValueChange={onValueChange}
       >
@@ -45,9 +30,12 @@ export default class SectionPicker extends Component {
   }
 }
 
+let width = 150;
 const styles = StyleSheet.create({
   Picker: {
     backgroundColor: greyscale.lightShade,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: greyscale.darkShade,
+    width: width
   }
 });

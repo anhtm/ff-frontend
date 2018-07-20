@@ -44,10 +44,11 @@ export default class CustomInput extends Component {
   }
 }
 
+let marginLeft = 25;
 const styles = StyleSheet.create({
   field: {
     flexDirection: 'row',
-    marginLeft: 20
+    marginLeft: marginLeft
   },
   input: {
     color: greyscale.darkAccent
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     backgroundColor: greyscale.lightShade,
     borderRadius: 5,
-    borderBottomColor: greyscale.darkAccent,
-    flex: 1
+    borderBottomColor: greyscale.darkAccent
   }
 });

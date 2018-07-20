@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 5,
     fontSize: 14,
-    color: greyscale.main
+    color: greyscale.darkShade
   }
 });
